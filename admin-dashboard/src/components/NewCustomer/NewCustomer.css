@@ -1,0 +1,25 @@
+.new-customers {
+    margin-bottom: 30px;
+  }
+  
+  .new-customers table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .new-customers th, 
+  .new-customers td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+  }
+  
+  .new-customers th {
+    background-color: #f4f4f4;
+  }
+  
+  .new-customers img.icon {
+    width: 24px;
+    height: 24px;
+  }
+  

@@ -1,0 +1,46 @@
+.stats-card {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    border-radius: 5px;
+    color: white;
+    text-align: center;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+  
+  .stats-card:last-child {
+    margin-right: 0;
+  }
+  
+  .stats-icon {
+    margin-right: 10px;
+  }
+  
+  .stats-content {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+  }
+  
+  .stats-content h3,
+  .stats-content p {
+    margin: 0;
+  }
+  
+  .green {
+    background-color: #2ecc71;
+  }
+  
+  .pink {
+    background-color: #e91e63;
+  }
+  
+  .yellow {
+    background-color: #f1c40f;
+  }
+  
+  .blue {
+    background-color: #3498db;
+  }
+  

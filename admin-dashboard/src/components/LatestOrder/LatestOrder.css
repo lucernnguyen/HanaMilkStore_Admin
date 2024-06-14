@@ -1,0 +1,32 @@
+.latest-orders {
+    margin-bottom: 30px;
+  }
+  
+  .latest-orders table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .latest-orders th, 
+  .latest-orders td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+  }
+  
+  .latest-orders th {
+    background-color: #f4f4f4;
+  }
+  
+  .latest-orders button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  .latest-orders button:hover {
+    background-color: #2980b9;
+  }
+  

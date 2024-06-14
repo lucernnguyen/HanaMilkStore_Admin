@@ -1,0 +1,14 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.layout {
+  display: flex;
+}
+
+.content {
+  margin-left: 250px; /* Phù hợp với chiều rộng của sidebar */
+  padding: 20px;
+  width: calc(100% - 250px); /* Đảm bảo nội dung không bị đè lên */
+}
