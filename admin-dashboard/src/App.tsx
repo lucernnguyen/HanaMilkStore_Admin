@@ -8,6 +8,7 @@ import Orders from './components/OrderList/OrderList';
 import ProductsSection from './components/ProductList/ProductList';
 import CustomerList from './components/CustomerList/CustomerList';
 import CustomerDetail from './components/CustomerDetail/CustomerDetail';
+import EditProduct from './components/EditProduct/EditProduct';
 
 const App: React.FC = () => {
   return (
@@ -20,6 +21,7 @@ const App: React.FC = () => {
         <Route path="order-details/:id" element={<OrderDetails />} />
         <Route path="customers" element={<CustomerList />} />
         <Route path="customer-details/:id" element={<CustomerDetail />} />
+        <Route path="edit-product/:id" element={<EditProduct />} />
       </Route>
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>

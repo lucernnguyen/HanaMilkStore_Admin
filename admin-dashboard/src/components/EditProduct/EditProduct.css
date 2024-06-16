@@ -1,0 +1,86 @@
+/* src/components/EditProduct/EditProduct.css */
+.edit-product-container {
+  margin: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-column {
+  flex: 1;
+  margin: 0 10px;
+}
+
+.form-column label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.form-column input,
+.form-column select {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  box-sizing: border-box;
+}
+
+button[type="button"] {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-top: 10px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+button[type="button"]:hover {
+  background-color: #45a049;
+}
+
+.image-upload-section {
+  margin-top: 20px;
+}
+
+.image-upload-section h3 {
+  margin-bottom: 10px;
+}
+
+.image-upload-section input[type="file"] {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.image-upload-section button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.image-upload-section button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.image-upload-section button:hover:enabled {
+  background-color: #45a049;
+}

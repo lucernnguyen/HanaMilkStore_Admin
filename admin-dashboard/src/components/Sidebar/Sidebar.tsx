@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Sidebar.css';
-
+import logo from 'E:/SWP391/demowed/Admin_React/admin-dashboard/src/dep2.png'; 
 const Sidebar: React.FC = () => {
   const [isProductDropdownOpen, setIsProductDropdownOpen] = useState(false);
 
@@ -12,7 +12,7 @@ const Sidebar: React.FC = () => {
   return (
     <div className="sidebar">
       <div className="logo">
-        <img src="path/to/logo.png" alt="Logo" />
+        <img src={logo} alt="Logo" />
       </div>
       <ul>
         <li>
