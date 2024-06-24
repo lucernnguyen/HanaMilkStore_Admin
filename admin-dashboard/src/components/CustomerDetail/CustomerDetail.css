@@ -1,0 +1,57 @@
+.customer-detail-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.customer-detail-container h1 {
+  text-align: center;
+  color: #333;
+}
+
+.customer-detail-container .card {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.customer-detail-container .card h2 {
+  margin-bottom: 10px;
+  color: #007bff;
+}
+
+.customer-detail-container .card p {
+  margin: 5px 0;
+  color: #555;
+}
+
+.customer-detail-container table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.customer-detail-container th,
+.customer-detail-container td {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.customer-detail-container th {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.customer-detail-container tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.customer-detail-container tr:hover {
+  background-color: #ddd;
+}

@@ -1,0 +1,23 @@
+/* src/components/OrderList/Order.css */
+.order-container {
+    padding: 20px;
+  }
+  
+  .order-container h2 {
+    margin-bottom: 20px;
+  }
+  
+  .order-container table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .order-container th, .order-container td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  .order-container th {
+    background-color: #f2f2f2;
+  }
+  

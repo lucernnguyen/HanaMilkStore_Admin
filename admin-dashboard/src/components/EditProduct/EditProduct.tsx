@@ -11,6 +11,7 @@ const EditProduct: React.FC = () => {
   const [brands, setBrands] = useState<Brand[]>([]);
   const [milkTypes, setMilkTypes] = useState<MilkType[]>([]);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [selectedPictureId, setSelectedPictureId] = useState<number | null>(null);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -67,18 +68,24 @@ const EditProduct: React.FC = () => {
     }
   };
 
+  const handlePictureSelect = (milkPictureId: number) => {
+    setSelectedPictureId(milkPictureId);
+  };
+
   const handleFileUpload = async () => {
-    if (selectedFile && product) {
+    if (selectedFile && selectedPictureId) {
       try {
         const formData = new FormData();
         formData.append('file', selectedFile);
-        await productService.uploadProductImage(product.milkId, formData);
+        await productService.updateProductImage(selectedPictureId, formData);
         // Refresh the product data to show the new image
         const updatedProduct = await productService.getProductById(Number(id));
         setProduct(updatedProduct);
       } catch (error) {
         console.error('Error uploading file:', error);
       }
+    } else {
+      console.log('No file selected or picture not chosen');
     }
   };
 
@@ -108,7 +115,7 @@ const EditProduct: React.FC = () => {
             </label>
             <label>
               Capacity:
-              <input type="number" name="capacity" value={product.capacity} onChange={handleChange} />
+              <input type="text" name="capacity" value={product.capacity} onChange={handleChange} />
             </label>
             <label>
               Milk Type:
@@ -146,9 +153,27 @@ const EditProduct: React.FC = () => {
       <div className="image-upload-section">
         <h3>Upload Image</h3>
         <input type="file" onChange={handleFileChange} />
-        <button onClick={handleFileUpload} disabled={!selectedFile}>
+        <button onClick={handleFileUpload} disabled={!selectedFile || !selectedPictureId}>
           Upload
         </button>
+      </div>
+
+      <div className="image-selection">
+        <h3>Select Image to Update</h3>
+        
+        {product.milkPictures && product.milkPictures.length > 0 ? (
+          product.milkPictures.map((picture) => (
+            <div key={picture.milkPictureId} onClick={() => handlePictureSelect(picture.milkPictureId)}>
+              <img
+                src={picture.picture}
+                alt="Milk Product"
+                className={selectedPictureId === picture.milkPictureId ? 'selected' : ''}
+              />
+            </div>
+          ))
+        ) : (
+          <p>No pictures available</p>
+        )}
       </div>
     </div>
   );
