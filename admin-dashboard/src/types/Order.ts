@@ -8,9 +8,12 @@ export interface Order {
     dateCreate: string;
     amount: number;
     orderStatus: string;
+    customerName?: string; // Thêm thuộc tính này để lưu tên khách hàng
+    itemsCount?: number; // Thêm thuộc tính này để lưu số lượng sản phẩm
   }
   
   export interface OrderDetail extends Order {
+    orderDetails: any;
     items: OrderItem[];
   }
   

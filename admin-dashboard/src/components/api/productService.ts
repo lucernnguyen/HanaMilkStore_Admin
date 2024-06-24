@@ -8,6 +8,10 @@ const getAllProducts = async (page: number, pageSize: number): Promise<Product[]
   const response = await axios.get(`${API_URL}/milks?pageIndex=${page}&pageSize=${pageSize}`);
   return response.data;
 };
+const getAllProductsWithouFilter = async () => {
+  const response = await axios.get(`${API_URL}/milks`);
+  return response.data;
+}
 const getProductById = async (id: number): Promise<Product> => {
   const response = await axios.get(`${API_URL}/milks/${id}`);
   return response.data;
@@ -54,5 +58,6 @@ export default {
   getAllMilkTypes,
   updateProductImage,
   uploadProductImage,
-  addProduct
+  addProduct,
+  getAllProductsWithouFilter
 };

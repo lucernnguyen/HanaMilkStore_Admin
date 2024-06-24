@@ -1,46 +1,43 @@
+/* StatsCard.css */
 .stats-card {
-    display: flex;
-    align-items: center;
-    padding: 20px;
-    border-radius: 5px;
-    color: white;
-    text-align: center;
-    margin-right: 10px;
-    cursor: pointer;
-  }
-  
-  .stats-card:last-child {
-    margin-right: 0;
-  }
-  
-  .stats-icon {
-    margin-right: 10px;
-  }
-  
-  .stats-content {
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-  }
-  
-  .stats-content h3,
-  .stats-content p {
-    margin: 0;
-  }
-  
-  .green {
-    background-color: #2ecc71;
-  }
-  
-  .pink {
-    background-color: #e91e63;
-  }
-  
-  .yellow {
-    background-color: #f1c40f;
-  }
-  
-  .blue {
-    background-color: #3498db;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  width: 200px;
+}
+
+.icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.icon-container svg {
+  width: 30px;
+  height: 30px;
+}
+
+.stats-info {
+  text-align: center;
+}
+
+.stats-info h3 {
+  margin: 10px 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.stats-info p {
+  margin: 0;
+  font-size: 16px;
+  color: #333;
+}

@@ -16,4 +16,8 @@ export interface User {
     description: string;
     userDetails?: User; // Thêm chi tiết người dùng vào Customer
   }
-  
+  export interface Member {
+    memberId: number;
+    userId: number;
+    desciption: string;
+  }

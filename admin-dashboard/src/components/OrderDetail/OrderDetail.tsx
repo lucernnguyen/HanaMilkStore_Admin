@@ -66,11 +66,11 @@ const OrderDetailComponent: React.FC = () => {
     <div className="order-detail-container">
       <h2>Order Detail</h2>
       <p><strong>Order ID:</strong> {orderDetail.orderId}</p>
-      <p><strong>Member Name:</strong> {orderDetail.memberId}</p>
+      <p><strong>Member Name:</strong> {orderDetail.memberName}</p>
       <p><strong>Voucher Name:</strong> {orderDetail.voucherName}</p>
       <p><strong>Order Date:</strong> {orderDetail.dateCreate}</p>
       <p><strong>Status:</strong> {orderDetail.orderStatus}</p>
-      {/* Add more details as needed */}
+      
       <div className="update-status-section">
         <label htmlFor="status">Update Status:</label>
         <select id="status" value={newStatus} onChange={handleStatusChange}>
@@ -83,6 +83,26 @@ const OrderDetailComponent: React.FC = () => {
         </select>
         <button onClick={handleUpdateStatus}>Update Status</button>
       </div>
+      
+      <h3>Order Items</h3>
+      <table className="order-items-table">
+        <thead>
+          <tr>
+            <th>Product ID</th>
+            <th>Quantity</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          {orderDetail.orderDetails.map((item: { orderDetailId: React.Key | null | undefined; milkId: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined; quantity: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined; total: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined; }) => (
+            <tr key={item.orderDetailId}>
+              <td>{item.milkId}</td>
+              <td>{item.quantity}</td>
+              <td>{item.total}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };
