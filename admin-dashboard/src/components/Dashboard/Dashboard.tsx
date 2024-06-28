@@ -68,7 +68,7 @@ const Dashboard: React.FC = () => {
           color="green" 
           icon={FaDollarSign}  
           title="Tổng doanh thu" 
-          value={`$${stats ? stats.totalRevenue : 0}`} 
+          value={`${stats ? stats.totalRevenue : 0} Đồng`} 
         />
         <StatsCard 
           color="pink" 

@@ -1,54 +1,68 @@
 .order-detail-container {
-  max-width: 800px;
-  margin: 0 auto;
+  width: 100%;
   padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+.order-items-status-container {
+  display: flex;
+  justify-content: space-between;
+}
+.order-items-container {
+  flex: 1;
+  margin-right: 20px;
 }
 
-.order-detail-container h2 {
-  text-align: center;
-  color: #333;
+.order-status-container {
+  flex: 1;
+}
+.stats-cards {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
 }
 
-.order-detail-container p {
-  font-size: 16px;
-  color: #555;
-  margin: 10px 0;
+.stats-card {
+  width: 12rem; /* Giảm kích thước của card */
+  height: 10rem; /* Thêm dòng này để giảm chiều cao của card */
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  margin-right: 5px; /* Giảm khoảng cách giữa các card */
 }
+
+.icon-container {
+  padding: 10px; /* Giảm padding */
+  color: #fff;
+  font-size: 12px; /* Giảm kích thước của biểu tượng */
+}
+
+.stats-info {
+  padding: 10px; /* Giảm padding */
+}
+
+.stats-info h3, .stats-info p {
+  margin: 0; /* Loại bỏ margin mặc định */
+  font-size: 14px; /* Giảm kích thước của văn bản */
+}
+
 
 .update-status-section {
-  margin-top: 20px;
-  display: flex;
-  align-items: center;
+  margin-bottom: 20px;
 }
 
-.update-status-section label {
-  margin-right: 10px;
-  font-size: 16px;
-  color: #333;
+.order-items-table {
+  width: 100%;
+  border-collapse: collapse;
 }
 
-.update-status-section select {
-  padding: 8px 12px;
-  font-size: 16px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  margin-right: 10px;
+.order-items-table th,
+.order-items-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
 }
 
-.update-status-section button {
-  padding: 8px 16px;
-  font-size: 16px;
-  color: #fff;
-  background-color: #007bff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.update-status-section button:hover {
-  background-color: #0056b3;
+.order-items-table th {
+  background-color: #f2f2f2;
 }

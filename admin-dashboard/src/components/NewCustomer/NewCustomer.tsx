@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-
 import './NewCustomer.css';
 import { User, Member } from '../../types/User';
 import customerService from '../api/customerService';
@@ -43,26 +42,18 @@ const NewCustomers: React.FC = () => {
   return (
     <div className="new-customers">
       <h3>Khách hàng mới</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Tên</th>
-            <th>Ngày tạo</th>
-            <th>Icon</th>
-          </tr>
-        </thead>
-        <tbody>
-          {newCustomers.map((customer) => (
-            <tr key={customer.userId}>
-              <td>{customer.userName}</td>
-              <td>{customer.dateCreate}</td>
-              <td>
-                <img src={customer.profilePicture} alt="Icon" className="icon" />
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <div className="customer-cards">
+        {newCustomers.map((customer) => (
+          <div key={customer.userId} className="customer-card">
+          <div className="customer-info">
+            <p className="customer-name">{customer.userName}</p>
+            <p className="customer-date">{customer.dateCreate}</p>
+          </div>
+          <img src={customer.profilePicture} alt="Icon" className="icon" />
+        </div>
+        
+        ))}
+      </div>
       <p><Link to="/customers">Xem tất cả khách hàng</Link></p>
     </div>
   );

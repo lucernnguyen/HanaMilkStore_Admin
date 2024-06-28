@@ -1,15 +1,17 @@
 import React from 'react';
 import './Header.css';
-
-const Header: React.FC = () => {
-    return (
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEnvelope, faBell } from '@fortawesome/free-solid-svg-icons';
+interface HeaderProps {
+    pageTitle: string;
+}
+const Header: React.FC<HeaderProps> = ({ pageTitle }) => {    return (
         <div className="header">
-            <div className="search-container">
-                <input type="text" placeholder="Search..." className="search-input" />
-                <button className="search-button">Tìm</button>
+            <div className="page-title">
+                <h1>{pageTitle}</h1>
             </div>
-            <img src="path/to/mail-icon.png" alt="Mail Icon" className="icon" />
-            <img src="path/to/notification-icon.png" alt="Notification Icon" className="icon" />
+            <FontAwesomeIcon icon={faEnvelope} className="icon" />
+            <FontAwesomeIcon icon={faBell} className="icon" />
             <div className="admin-info">
                 <span className="admin-name">Admin Name</span>
                 <img src="path/to/admin-photo.jpg" alt="Admin Photo" className="admin-photo" />

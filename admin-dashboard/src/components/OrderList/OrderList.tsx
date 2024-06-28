@@ -34,9 +34,10 @@ const OrderList: React.FC = () => {
     fetchOrders();
   }, []);
 
-  const handleOrderClick = (orderId: number) => {
-    navigate(`/order-detail/${orderId}`);
+  const handleOrderClick = (order: Order) => {
+    navigate(`/order-detail/${order.orderId}`, { state: { order } });
   };
+  
 
   if (loading) {
     return <div>Loading...</div>;
@@ -61,7 +62,7 @@ const OrderList: React.FC = () => {
         </thead>
         <tbody>
           {orders.map(order => (
-            <tr key={order.orderId} onClick={() => handleOrderClick(order.orderId)} style={{ cursor: 'pointer' }}>
+            <tr key={order.orderId} onClick={() => handleOrderClick(order)} style={{ cursor: 'pointer' }}>
               <td>{order.orderId}</td>
               <td>{order.memberName}</td>
               <td>{order.voucherName}</td>

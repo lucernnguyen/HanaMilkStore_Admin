@@ -42,17 +42,17 @@ const LatestOrders: React.FC = () => {
             <th>Tên khách hàng</th>
             <th>Ngày đặt hàng</th>
             <th>Giỏ hàng</th>
-            <th>Giá</th>
+            <th>Tổng giá trị</th>
             <th>Thao tác</th>
           </tr>
         </thead>
         <tbody>
           {orders.map((order) => (
             <tr key={order.orderId}>
-              <td>{order.customerName}</td>
+              <td>{order.memberName}</td>
               <td>{order.dateCreate}</td>
               <td>{order.itemsCount} items</td>
-              <td>${order.amount}</td>
+              <td>{order.amount.toLocaleString('vi-VN')} Đồng</td>
               <td>
                 <Link to={`/order-detail/${order.orderId}`}>
                   <button>Chi tiết</button>

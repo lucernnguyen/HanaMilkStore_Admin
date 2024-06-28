@@ -9,7 +9,7 @@ const Layout: React.FC = () => {
     <div className="layout">
       <Sidebar />
       <div className="content">
-        <Header />
+        <Header pageTitle="Admin Dashboard" /> 
         <Outlet />
       </div>
     </div>

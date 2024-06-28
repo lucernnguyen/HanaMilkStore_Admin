@@ -4,6 +4,7 @@ import customerService from './customerService';
 import userService from './userService';
 
 const API_URL = 'https://localhost:7188/api/orders';
+const ORDER_DETAIL_API_URL = 'https://localhost:7188/api/order-details';
 
 const MEMBER_API_URL = 'https://localhost:7188/api/members';
 const VOUCHER_API_URL = 'https://localhost:7188/api/vouchers';
@@ -28,12 +29,12 @@ const getNewestOrders = async () : Promise<Order[]> => {
     const ordersWithDetails = await Promise.all(orders.map(async (order: any) => {
       const member = await customerService.getCustomerById(order.memberId);
       const user = await userService.getUserById(member.userId);
-      const customerName = user.userName;
+      const memberName = user.userName;
       const itemsCount = order.orderDetails.length;
 
       return {
         ...order,
-        customerName,
+        memberName,
         itemsCount,
       };
     }));
@@ -57,11 +58,10 @@ const getOrderById = async (id: number): Promise<OrderDetail> => {
     throw error;
   }
 };
+const getOrderDetailsById = (orderDetailId: number) => {
+  return axios.get(`${ORDER_DETAIL_API_URL}/${orderDetailId}`).then(res => res.data);
+};
 
-//const getOrdersByCustomerId =  async (customerId: number): Promise<Order[]> => {
-  //const response = await axios.get<Order[]>(`${API_URL}?memberId=${customerId}`);
-  //return response.data;
-//};
 const getMemberNameById = async (memberId: number): Promise<string> => {
   try {
     const response = await axios.get(`${MEMBER_API_URL}/${memberId}`);
@@ -93,7 +93,9 @@ const updateOrderStatus = async (orderId: number, status: string): Promise<void>
     throw error;
   }
 };
-
+const getProductDetailsByOrderDetailId = (orderDetailId: number) => {
+  return axios.get(`${API_URL}/order-details/${orderDetailId}`).then(res => res.data);
+};
 const orderService = {
   getAllOrders,
   getOrderById,
@@ -102,6 +104,8 @@ const orderService = {
   updateOrderStatus,
  // getOrdersByCustomerId,
  getNewestOrders,
+ getProductDetailsByOrderDetailId,
+ getOrderDetailsById
 };
 
 export default orderService;

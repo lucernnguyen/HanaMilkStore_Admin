@@ -1,25 +1,59 @@
 .new-customers {
-    margin-bottom: 30px;
-  }
+  background-color: #f9f9f9;
+  max-width: fit-content;
+}
+
+.new-customers h3 {
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 24px;
+}
+
+.new-customers .customer-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 400px;
+  max-height: fit-content;
+}
+
+.new-customers .customer-card {
+  display: flex;
+  justify-content: space-around; /* or space-evenly */
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 25px;
+}
+
+
+.new-customers .customer-card .icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.new-customers .customer-card .customer-info {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
   
-  .new-customers table {
-    width: 100%;
-    border-collapse: collapse;
-  }
+}
+.new-customers .customer-card .customer-info .customer-name {
+  margin-right: 30px;
+}
+
+.new-customers p {
+  margin-top: 20px;
+  text-align: right;
   
-  .new-customers th, 
-  .new-customers td {
-    padding: 10px;
-    border: 1px solid #ddd;
-    text-align: left;
-  }
-  
-  .new-customers th {
-    background-color: #f4f4f4;
-  }
-  
-  .new-customers img.icon {
-    width: 24px;
-    height: 24px;
-  }
-  
+}
+
+.new-customers p a {
+  color: #007BFF;
+  text-decoration: none;
+}
+
+.new-customers p a:hover {
+  text-decoration: underline;
+}

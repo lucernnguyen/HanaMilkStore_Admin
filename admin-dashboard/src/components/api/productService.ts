@@ -50,7 +50,7 @@ const addProduct = async (product: Partial<Product>): Promise<Product> => {
   return response.data;
 }
 
-export default {
+const productService =  {
   getAllProducts,
   getProductById,
   updateProduct,
@@ -61,3 +61,4 @@ export default {
   addProduct,
   getAllProductsWithouFilter
 };
+export default productService;

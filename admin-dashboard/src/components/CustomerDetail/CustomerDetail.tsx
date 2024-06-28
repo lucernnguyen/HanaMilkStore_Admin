@@ -5,7 +5,7 @@ import './CustomerDetail.css';
 import { Order } from '../../types/Order';
 import { Customer, User } from '../../types/User';
 import customerService from '../api/customerService';
-//import orderService from '../api/orderService';
+import orderService from '../api/orderService';
 import userService from '../api/userService';
 
 const CustomerDetail: React.FC = () => {
@@ -25,8 +25,9 @@ const CustomerDetail: React.FC = () => {
         const userData: User = await userService.getUserById(customerData.userId);
         setUser(userData);
 
-        //const ordersData: Order[] = await orderService.getOrdersByCustomerId(Number(id));
-        //setOrders(ordersData);
+        const allOrders: Order[] = await orderService.getAllOrders();
+        const customerOrders = allOrders.filter(order => order.memberId === Number(id));
+        setOrders(customerOrders);
       } catch (error) {
         console.error('Error fetching customer details:', error);
         setError('Failed to fetch customer details. Please try again later.');

@@ -1,37 +1,21 @@
 .header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-bottom: 20px;
-    border-bottom: 2px solid #ccc;
-  }
-  
-  .search-container {
-    display: flex;
-    align-items: center;
-    flex-grow: 1;
-  }
-  
-  .search-input {
-    padding: 10px;
-    border: 2px solid pink;
-    border-radius: 5px 0 0 5px;
-    flex-grow: 1;
-  }
-  
-  .search-button {
-    padding: 10px;
-    background-color: pink;
-    border: none;
-    border-radius: 0 5px 5px 0;
-    cursor: pointer;
-  }
-  
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; 
+  padding-bottom: 20px;
+  border-bottom: 2px solid #ccc;
+}
+.page-title{
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
   .icon {
-    width: 24px;
-    height: 24px;
-    margin-left: 20px;
-  }
+    margin: 0 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
   
   .admin-info {
     display: flex;
