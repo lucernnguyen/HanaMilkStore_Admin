@@ -1,0 +1,38 @@
+.add-voucher-container {
+    padding: 20px;
+  }
+  
+  .add-voucher-container form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .add-voucher-container label {
+    margin-bottom: 10px;
+  }
+  
+  .add-voucher-container input {
+    margin-bottom: 10px;
+    padding: 5px;
+  }
+  
+  .add-voucher-container button {
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .add-voucher-container button:hover {
+    background-color: #45a049;
+  }
+  
+  .error {
+    color: red;
+  }
+  
+  .success
+  {
+color: green;
+}

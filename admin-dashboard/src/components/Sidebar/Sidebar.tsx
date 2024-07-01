@@ -37,6 +37,21 @@ const Sidebar: React.FC = () => {
           <Link to="/orders">Orders</Link>
         </li>
         <li><Link to="/customers">Customers</Link></li>
+        <li>
+          <div className="dropdown" onClick={toggleProductDropdown}>
+            Voucher
+          </div>
+          {isProductDropdownOpen && (
+            <ul className="dropdown-menu">
+              <li>
+              <Link to="/vouchers">Quản lý voucher</Link>
+              </li>
+              <li>
+              <Link to="/add-voucher">Thêm voucher</Link>
+              </li>
+            </ul>
+          )}
+        </li>
       </ul>
     </div>
   );

@@ -24,7 +24,10 @@ const OrderDetailComponent: React.FC = () => {
 
         if (order && order.orderDetails) {
           const memberData = await orderService.getMemberNameById(order.memberId);
-          const voucherData = await orderService.getVoucherNameById(order.voucherId);
+          let voucherData = 'không sử dụng';
+            if (order.voucherId) {
+              voucherData = await orderService.getVoucherNameById(order.voucherId);
+            }
           const orderDetailsData = await Promise.all(order.orderDetails.map(item => orderService.getOrderDetailsById(item.orderDetailId)));
 
           const allMilks: Product[] = await productService.getAllProductsWithouFilter();
@@ -127,7 +130,7 @@ const OrderDetailComponent: React.FC = () => {
                   <td>{item.productName}</td>
                   <td><img src={item.productImage} alt={item.productName} width="50" height="50" /></td>
                   <td>{item.quantity}</td>
-                  <td>{item.total}</td> {/* Đổi thành total */}
+                  <td>{item.total.toLocaleString('vi-VN')}</td> {/* Đổi thành total */}
                 </tr>
               ))}
             </tbody>
@@ -153,7 +156,7 @@ const OrderDetailComponent: React.FC = () => {
         </div>
       </div>
       <h3>Total Amount</h3>
-      <p>{orderDetail.amount}</p> {/* Hiển thị total amount */}
+      <p>{orderDetail.amount.toLocaleString('vi-VN')}</p> {/* Hiển thị total amount */}
     </div>
   );
 };

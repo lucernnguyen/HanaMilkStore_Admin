@@ -261,3 +261,174 @@ Java HotSpot(TM) 64-Bit Server VM (build 25.381-b09, mixed mode)
 2024-06-27 20:41:59 info: Row(s) deleted
 2024-06-27 20:41:59 info: Row(s) deleted
 2024-06-27 20:41:59 info: Row(s) deleted
+2024-06-28 12:53:54 info: Congratulations, your extension "Embold" is now active!
+2024-06-28 12:53:54 info: tempDirectory : c:\Users\ASUS\.vscode\extensions\embold-vscode.embold-0.1.8\temp
+2024-06-28 12:53:54 info: Extraction complete for source: c:\Users\ASUS\.vscode\extensions\embold-vscode.embold-0.1.8\resources\embold-scanner-archive.zip, destination: c:\Users\ASUS\.vscode\extensions\embold-vscode.embold-0.1.8\temp
+2024-06-28 12:53:54 info: Extension installed on machine OS : win32
+2024-06-28 12:53:54 info: Fetched the issues from DB
+2024-06-28 12:53:55 info: Java version installed on machine : 
+java version "1.8.0_381"
+Java(TM) SE Runtime Environment (build 1.8.0_381-b09)
+Java HotSpot(TM) 64-Bit Server VM (build 25.381-b09, mixed mode)
+
+2024-06-28 12:53:55 info: Java installed on machine.
+2024-06-28 12:53:56 error: request to https://v1.embold.io/api/plugins failed, reason: getaddrinfo ENOTFOUND v1.embold.io
+2024-06-28 12:53:56 info: Current installed embold extension version : 0.1.8
+2024-06-28 12:53:56 info: Latest embold extension version on marketplace : 0.1.6
+2024-06-28 13:26:31 info: Row(s) deleted
+2024-06-28 13:26:31 info: Row(s) deleted
+2024-06-28 13:26:32 info: Row(s) deleted
+2024-06-28 13:26:32 info: Row(s) deleted
+2024-06-28 13:44:24 info: Row(s) deleted
+2024-06-28 14:16:39 info: Row(s) deleted
+2024-06-28 14:16:39 info: Row(s) deleted
+2024-06-28 14:38:39 info: Row(s) deleted
+2024-06-28 14:38:39 info: Row(s) deleted
+2024-06-28 14:38:39 info: Row(s) deleted
+2024-06-28 14:38:39 info: Row(s) deleted
+2024-06-28 14:46:35 info: Row(s) deleted
+2024-06-28 14:47:00 info: Row(s) deleted
+2024-06-28 14:47:22 info: Row(s) deleted
+2024-06-28 15:45:52 info: Congratulations, your extension "Embold" is now active!
+2024-06-28 15:45:52 info: tempDirectory : c:\Users\ASUS\.vscode\extensions\embold-vscode.embold-0.1.8\temp
+2024-06-28 15:45:54 info: Extraction complete for source: c:\Users\ASUS\.vscode\extensions\embold-vscode.embold-0.1.8\resources\embold-scanner-archive.zip, destination: c:\Users\ASUS\.vscode\extensions\embold-vscode.embold-0.1.8\temp
+2024-06-28 15:45:54 info: Extension installed on machine OS : win32
+2024-06-28 15:45:54 info: Fetched the issues from DB
+2024-06-28 15:45:55 info: Java version installed on machine : 
+java version "1.8.0_381"
+Java(TM) SE Runtime Environment (build 1.8.0_381-b09)
+Java HotSpot(TM) 64-Bit Server VM (build 25.381-b09, mixed mode)
+
+2024-06-28 15:45:55 info: Java installed on machine.
+2024-06-28 15:45:56 info: Embold extension version response:{"hasSupport":false,"version":"0.1.6","changeNotes":"<div> <p>Release Date: 09 Oct, 2023 <br><span>Bug fixes and improvements.</span></p> </div>"}
+2024-06-28 15:45:56 info: Current installed embold extension version : 0.1.8
+2024-06-28 15:45:56 info: Latest embold extension version on marketplace : 0.1.6
+2024-06-29 10:26:56 info: Congratulations, your extension "Embold" is now active!
+2024-06-29 10:26:56 info: tempDirectory : c:\Users\ASUS\.vscode\extensions\embold-vscode.embold-0.1.8\temp
+2024-06-29 10:26:57 info: Extraction complete for source: c:\Users\ASUS\.vscode\extensions\embold-vscode.embold-0.1.8\resources\embold-scanner-archive.zip, destination: c:\Users\ASUS\.vscode\extensions\embold-vscode.embold-0.1.8\temp
+2024-06-29 10:26:57 info: Extension installed on machine OS : win32
+2024-06-29 10:26:57 info: Fetched the issues from DB
+2024-06-29 10:26:57 info: Java version installed on machine : 
+java version "1.8.0_381"
+Java(TM) SE Runtime Environment (build 1.8.0_381-b09)
+Java HotSpot(TM) 64-Bit Server VM (build 25.381-b09, mixed mode)
+
+2024-06-29 10:26:57 info: Java installed on machine.
+2024-06-29 10:26:58 info: Embold extension version response:{"hasSupport":false,"version":"0.1.6","changeNotes":"<div> <p>Release Date: 09 Oct, 2023 <br><span>Bug fixes and improvements.</span></p> </div>"}
+2024-06-29 10:26:58 info: Current installed embold extension version : 0.1.8
+2024-06-29 10:26:58 info: Latest embold extension version on marketplace : 0.1.6
+2024-07-01 11:05:04 info: Congratulations, your extension "Embold" is now active!
+2024-07-01 11:05:04 info: tempDirectory : c:\Users\ASUS\.vscode\extensions\embold-vscode.embold-0.1.8\temp
+2024-07-01 11:05:04 info: Extraction complete for source: c:\Users\ASUS\.vscode\extensions\embold-vscode.embold-0.1.8\resources\embold-scanner-archive.zip, destination: c:\Users\ASUS\.vscode\extensions\embold-vscode.embold-0.1.8\temp
+2024-07-01 11:05:04 info: Extension installed on machine OS : win32
+2024-07-01 11:05:04 info: Fetched the issues from DB
+2024-07-01 11:05:04 info: Java version installed on machine : 
+java version "1.8.0_381"
+Java(TM) SE Runtime Environment (build 1.8.0_381-b09)
+Java HotSpot(TM) 64-Bit Server VM (build 25.381-b09, mixed mode)
+
+2024-07-01 11:05:04 info: Java installed on machine.
+2024-07-01 11:05:05 info: Embold extension version response:{"hasSupport":false,"version":"0.1.6","changeNotes":"<div> <p>Release Date: 09 Oct, 2023 <br><span>Bug fixes and improvements.</span></p> </div>"}
+2024-07-01 11:05:05 info: Current installed embold extension version : 0.1.8
+2024-07-01 11:05:05 info: Latest embold extension version on marketplace : 0.1.6
+2024-07-01 11:08:38 info: Row(s) deleted
+2024-07-01 11:14:32 info: Row(s) deleted
+2024-07-01 11:18:12 info: Row(s) deleted
+2024-07-01 11:22:09 info: Row(s) deleted
+2024-07-01 11:22:25 info: Row(s) deleted
+2024-07-01 11:22:25 info: Row(s) deleted
+2024-07-01 11:22:25 info: Row(s) deleted
+2024-07-01 11:22:25 info: Row(s) deleted
+2024-07-01 11:22:25 info: Row(s) deleted
+2024-07-01 11:23:53 info: Row(s) deleted
+2024-07-01 11:23:53 info: Row(s) deleted
+2024-07-01 11:23:53 info: Row(s) deleted
+2024-07-01 11:25:20 info: Row(s) deleted
+2024-07-01 11:25:20 info: Row(s) deleted
+2024-07-01 11:25:20 info: Row(s) deleted
+2024-07-01 11:28:45 info: Row(s) deleted
+2024-07-01 11:31:43 info: Row(s) deleted
+2024-07-01 11:31:43 info: Row(s) deleted
+2024-07-01 11:31:43 info: Row(s) deleted
+2024-07-01 11:31:43 info: Row(s) deleted
+2024-07-01 11:33:28 info: Row(s) deleted
+2024-07-01 11:33:28 info: Row(s) deleted
+2024-07-01 11:41:09 info: Row(s) deleted
+2024-07-01 11:41:09 info: Row(s) deleted
+2024-07-01 11:41:09 info: Row(s) deleted
+2024-07-01 11:43:37 info: Row(s) deleted
+2024-07-01 12:01:59 info: Row(s) deleted
+2024-07-01 12:01:59 info: Row(s) deleted
+2024-07-01 12:01:59 info: Row(s) deleted
+2024-07-01 12:17:40 info: Row(s) deleted
+2024-07-01 12:20:36 info: Row(s) deleted
+2024-07-01 12:32:12 info: Row(s) deleted
+2024-07-01 12:32:12 info: Row(s) deleted
+2024-07-01 12:34:45 info: Row(s) deleted
+2024-07-01 12:34:45 info: Row(s) deleted
+2024-07-01 12:34:45 info: Row(s) deleted
+2024-07-01 12:55:08 info: Row(s) deleted
+2024-07-01 12:56:50 info: Row(s) deleted
+2024-07-01 12:56:50 info: Row(s) deleted
+2024-07-01 12:56:50 info: Row(s) deleted
+2024-07-01 12:56:50 info: Row(s) deleted
+2024-07-01 12:58:50 info: Row(s) deleted
+2024-07-01 12:58:50 info: Row(s) deleted
+2024-07-01 13:06:47 info: Row(s) deleted
+2024-07-01 13:06:47 info: Row(s) deleted
+2024-07-01 13:08:01 info: Row(s) deleted
+2024-07-01 13:08:01 info: Row(s) deleted
+2024-07-01 13:08:01 info: Row(s) deleted
+2024-07-01 13:08:01 info: Row(s) deleted
+2024-07-01 13:08:01 info: Row(s) deleted
+2024-07-01 13:53:17 info: Row(s) deleted
+2024-07-01 13:53:17 info: Row(s) deleted
+2024-07-01 14:20:49 info: Row(s) deleted
+2024-07-01 14:20:49 info: Row(s) deleted
+2024-07-01 14:34:52 info: Row(s) deleted
+2024-07-01 14:40:08 info: Row(s) deleted
+2024-07-01 14:40:08 info: Row(s) deleted
+2024-07-01 14:40:08 info: Row(s) deleted
+2024-07-01 15:17:09 info: Row(s) deleted
+2024-07-01 15:18:46 info: Row(s) deleted
+2024-07-01 15:20:10 info: Row(s) deleted
+2024-07-01 15:22:31 info: Row(s) deleted
+2024-07-01 15:24:46 info: Row(s) deleted
+2024-07-01 15:30:37 info: Row(s) deleted
+2024-07-01 15:49:42 info: Row(s) deleted
+2024-07-01 15:49:42 info: Row(s) deleted
+2024-07-01 15:57:08 info: Row(s) deleted
+2024-07-01 15:57:08 info: Row(s) deleted
+2024-07-01 15:57:08 info: Row(s) deleted
+2024-07-01 16:02:27 info: Row(s) deleted
+2024-07-01 17:28:29 info: Row(s) deleted
+2024-07-01 17:28:29 info: Row(s) deleted
+2024-07-01 17:28:29 info: Row(s) deleted
+2024-07-01 17:28:29 info: Row(s) deleted
+2024-07-01 17:31:05 info: Row(s) deleted
+2024-07-01 17:31:05 info: Row(s) deleted
+2024-07-01 17:31:05 info: Row(s) deleted
+2024-07-01 17:31:05 info: Row(s) deleted
+2024-07-01 17:36:42 info: Row(s) deleted
+2024-07-01 17:36:42 info: Row(s) deleted
+2024-07-01 17:36:42 info: Row(s) deleted
+2024-07-01 17:39:55 info: Row(s) deleted
+2024-07-01 17:41:25 info: Row(s) deleted
+2024-07-01 17:43:28 info: Row(s) deleted
+2024-07-01 17:51:25 info: Row(s) deleted
+2024-07-01 17:51:25 info: Row(s) deleted
+2024-07-01 17:51:25 info: Row(s) deleted
+2024-07-01 17:51:25 info: Row(s) deleted
+2024-07-01 17:51:25 info: Row(s) deleted
+2024-07-01 17:51:25 info: Row(s) deleted
+2024-07-01 17:51:25 info: Row(s) deleted
+2024-07-01 17:53:13 info: Row(s) deleted
+2024-07-01 17:53:13 info: Row(s) deleted
+2024-07-01 18:00:57 info: Row(s) deleted
+2024-07-01 18:00:57 info: Row(s) deleted
+2024-07-01 18:14:41 info: Row(s) deleted
+2024-07-01 18:14:41 info: Row(s) deleted
+2024-07-01 18:14:41 info: Row(s) deleted
+2024-07-01 18:17:31 info: Row(s) deleted
+2024-07-01 18:17:31 info: Row(s) deleted
+2024-07-01 18:17:31 info: Row(s) deleted

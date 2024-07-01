@@ -1,0 +1,34 @@
+.voucher-list-container {
+    padding: 20px;
+  }
+  
+  .voucher-list-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .voucher-list-table th,
+  .voucher-list-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  .voucher-list-table th {
+    background-color: #f2f2f2;
+    text-align: left;
+  }
+  
+  .voucher-list-table tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .pagination {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+  }
+  
+  .pagination button {
+    padding: 5px 10px;
+  }
+  

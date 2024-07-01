@@ -32,7 +32,7 @@ form {
   box-sizing: border-box;
 }
 
-button[type="button"] {
+ button[type="button"] {
   background-color: #4CAF50; /* Green */
   border: none;
   color: white;

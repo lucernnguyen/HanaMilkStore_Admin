@@ -1,6 +1,6 @@
 // src/components/api/productService.ts
 import axios from 'axios';
-import { Product, Brand, MilkType } from '../../types/Product';
+import { Product, Brand, MilkType, MilkPicture } from '../../types/Product';
 
 const API_URL = 'https://localhost:7188/api';
 
@@ -38,17 +38,34 @@ const updateProductImage = async (id: number, formData: FormData): Promise<void>
     }
   });
 };
-const uploadProductImage = async (milkId: number, formData: FormData): Promise<void> => {
-  await axios.post(`${API_URL}/milk-pictures/${milkId}/`, formData, {
-    headers: {
-      'Content-Type': 'multipart/form-data'
-    }
-  });
-}
+const uploadProductImage = async (milkId: number, picture: string): Promise<void> => {
+  try {
+    const payload: MilkPicture = {
+      milkPictureId: 0, // This would typically be set by the backend
+      milkId,
+      picture,
+    };
+    await axios.post(`${API_URL}/milk-pictures/${milkId}`, payload, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+  } catch (error) {
+    console.error('Error uploading product image:', error);
+    throw error;
+  }
+};
 const addProduct = async (product: Partial<Product>): Promise<Product> => {
   const response = await axios.post(`${API_URL}/milks`, product);
   return response.data;
-}
+};
+const   deleteProductImage = async (milkPictureId: number) => {
+  await axios.delete(`${API_URL}/milk-pictures/${milkPictureId}`);
+};
+
+const deleteProduct = async (productId: number) => {
+  await axios.delete(`${API_URL}/milks/${productId}`);
+};
 
 const productService =  {
   getAllProducts,
@@ -59,6 +76,8 @@ const productService =  {
   updateProductImage,
   uploadProductImage,
   addProduct,
-  getAllProductsWithouFilter
+  getAllProductsWithouFilter,
+  deleteProductImage,
+  deleteProduct
 };
 export default productService;

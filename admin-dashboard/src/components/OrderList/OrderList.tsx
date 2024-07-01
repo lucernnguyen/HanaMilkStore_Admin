@@ -17,11 +17,14 @@ const OrderList: React.FC = () => {
         const ordersWithNames = await Promise.all(
           ordersData.map(async (order) => {
             const memberName = await orderService.getMemberNameById(order.memberId);
-            const voucherName = await orderService.getVoucherNameById(order.voucherId);
+            let voucherName = 'không sử dụng';
+            if (order.voucherId) {
+              voucherName = await orderService.getVoucherNameById(order.voucherId);
+            }
             return { ...order, memberName, voucherName };
           })
         );
-        
+  
         setOrders(ordersWithNames);
       } catch (error) {
         console.error('Error fetching orders:', error);
@@ -30,9 +33,10 @@ const OrderList: React.FC = () => {
         setLoading(false);
       }
     };
-
+  
     fetchOrders();
   }, []);
+  
 
   const handleOrderClick = (order: Order) => {
     navigate(`/order-detail/${order.orderId}`, { state: { order } });
