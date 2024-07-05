@@ -4,7 +4,11 @@ import { Product, Brand, MilkType, MilkPicture } from '../../types/Product';
 
 const API_URL = 'https://localhost:7188/api';
 
-const getAllProducts = async (page: number, pageSize: number): Promise<Product[]> => {
+const getAllProducts = async (page: number, pageSize: number, milkTypeId: number): Promise<Product[]> => {
+  const response = await axios.get(`${API_URL}/milks?pageIndex=${page}&pageSize=${pageSize}&milkType=${milkTypeId}`);
+  return response.data;
+};
+const getAllProductsWithoutMilkType = async (page: number, pageSize: number): Promise<Product[]> => {
   const response = await axios.get(`${API_URL}/milks?pageIndex=${page}&pageSize=${pageSize}`);
   return response.data;
 };
@@ -78,6 +82,7 @@ const productService =  {
   addProduct,
   getAllProductsWithouFilter,
   deleteProductImage,
-  deleteProduct
+  deleteProduct,
+  getAllProductsWithoutMilkType
 };
 export default productService;

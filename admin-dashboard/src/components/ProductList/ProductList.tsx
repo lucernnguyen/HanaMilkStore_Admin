@@ -7,34 +7,37 @@ import { Tabs, Tab, Box } from '@mui/material';
 
 const ProductList: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
-  const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
-  const [displayedProducts, setDisplayedProducts] = useState<Product[]>([]);
   const [page, setPage] = useState(1);
   const [selectedTab, setSelectedTab] = useState<number | null>(null);
   const pageSize = 5;
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const data = await productService.getAllProductsWithouFilter();
-        setProducts(data || []);
-        setFilteredProducts(data || []); // Initially show all products
-        updateDisplayedProducts(data || [], 1); // Initially show the first page
-      } catch (error) {
-        console.error('Error fetching products:', error);
-        setProducts([]);
-        setFilteredProducts([]);
-        setDisplayedProducts([]);
-      }
-    };
-    fetchProducts();
-  }, []);
+    if (selectedTab === null) {
+      fetchProductsWithoutFilter(page, pageSize);
+    } else {
+      fetchProducts(page, pageSize, selectedTab);
+    }
+  }, [page, selectedTab]);
 
-  const updateDisplayedProducts = (products: Product[], page: number) => {
-    const startIndex = (page - 1) * pageSize;
-    const endIndex = startIndex + pageSize;
-    setDisplayedProducts(products.slice(startIndex, endIndex));
+  const fetchProducts = async (page: number, pageSize: number, milkTypeId: number) => {
+    try {
+      const data = await productService.getAllProducts(page, pageSize, milkTypeId);
+      setProducts(data || []);
+    } catch (error) {
+      console.error('Error fetching products:', error);
+      setProducts([]);
+    }
+  };
+
+  const fetchProductsWithoutFilter = async (page: number, pageSize: number) => {
+    try {
+      const data = await productService.getAllProductsWithoutMilkType(page, pageSize);
+      setProducts(data || []);
+    } catch (error) {
+      console.error('Error fetching products:', error);
+      setProducts([]);
+    }
   };
 
   const handleEdit = (id: number) => {
@@ -42,34 +45,18 @@ const ProductList: React.FC = () => {
   };
 
   const handleNextPage = () => {
-    setPage(prevPage => {
-      const nextPage = prevPage + 1;
-      updateDisplayedProducts(filteredProducts, nextPage);
-      return nextPage;
-    });
+    setPage(prevPage => prevPage + 1);
   };
 
   const handlePreviousPage = () => {
     if (page > 1) {
-      setPage(prevPage => {
-        const previousPage = prevPage - 1;
-        updateDisplayedProducts(filteredProducts, previousPage);
-        return previousPage;
-      });
+      setPage(prevPage => prevPage - 1);
     }
   };
 
   const handleFilterMilkType = (type: number | null) => {
     setSelectedTab(type);
-    if (type === null) {
-      setFilteredProducts(products);
-      updateDisplayedProducts(products, 1);
-    } else {
-      const filtered = products.filter(product => product.milkTypeId === type);
-      setFilteredProducts(filtered);
-      updateDisplayedProducts(filtered, 1);
-    }
-    setPage(1); // Reset to the first page
+    setPage(1); // Reset to the first page when filtering
   };
 
   const handleDelete = async (productId: number) => {
@@ -85,10 +72,11 @@ const ProductList: React.FC = () => {
         await productService.deleteProduct(productId);
 
         // Update the product list after deletion
-        const updatedProducts = products.filter(product => product.milkId !== productId);
-        setProducts(updatedProducts);
-        setFilteredProducts(updatedProducts);
-        updateDisplayedProducts(updatedProducts, page);
+        if (selectedTab === null) {
+          fetchProductsWithoutFilter(page, pageSize);
+        } else {
+          fetchProducts(page, pageSize, selectedTab);
+        }
       } catch (error) {
         console.error('Error deleting product:', error);
       }
@@ -123,8 +111,8 @@ const ProductList: React.FC = () => {
           </tr>
         </thead>
         <tbody>
-          {displayedProducts.length > 0 ? (
-            displayedProducts.map(product => (
+          {products.length > 0 ? (
+            products.map(product => (
               <tr key={product.milkId}>
                 <td>{product.milkName}</td>
                 <td>{product.price}</td>
@@ -149,7 +137,7 @@ const ProductList: React.FC = () => {
       </table>
       <div className="pagination">
         <button onClick={handlePreviousPage} disabled={page === 1}>Trang trước</button>
-        <button onClick={handleNextPage} disabled={page * pageSize >= filteredProducts.length}>Trang tiếp</button>
+        <button onClick={handleNextPage} disabled={products.length < pageSize}>Trang tiếp</button>
       </div>
     </div>
   );
