@@ -8,6 +8,9 @@ import { FaUser, FaCalendar, FaShoppingCart, FaMoneyBill } from 'react-icons/fa'
 import StatsCard from '../StatsCard/StatsCard';
 import productService from '../api/productService';
 import { Product } from '../../types/Product';
+import voucherService from '../api/voucherService';
+import customerService from '../api/customerService';
+import userService from '../api/userService';
 
 const OrderDetailComponent: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -22,33 +25,42 @@ const OrderDetailComponent: React.FC = () => {
         const order = await orderService.getOrderById(Number(id));
 
         if (order && order.orderDetails) {
-          const memberData = await orderService.getMemberNameById(order.memberId);
-          let voucherData = 'không sử dụng';
-            if (order.voucherId) {
-              voucherData = await orderService.getVoucherNameById(order.voucherId);
-            }
+          const member = await customerService.getCustomerById(order.memberId);
+          const memberData = await userService.getUserById(member.userId);
+          let voucherData = { title: 'không sử dụng', discount: 0 };
+          if (order.voucherId) {
+            voucherData = await voucherService.getVoucherById(order.voucherId);
+          }
           const orderDetailsData = await Promise.all(order.orderDetails.map(item => orderService.getOrderDetailsById(item.orderDetailId)));
 
           const allMilks: Product[] = await productService.getAllProductsWithouFilter();
 
           const enrichedOrderDetailsData = orderDetailsData.map(detail => {
             const milk = allMilks.find(milk => milk.milkId === detail.milkId);
+            const unitPrice = milk?.price ?? 0; // Đơn giá lấy từ milk hoặc mặc định là 0
             return {
               ...detail,
               productName: milk?.milkName ?? 'Unknown',
               productImage: milk?.milkPictures[0]?.picture ?? 'path/to/default-image.png',
+              unitPrice,
               total: milk ? milk.price * detail.quantity : detail.total // tính lại total
             };
           });
 
-          const totalAmount = enrichedOrderDetailsData.reduce((acc, detail) => acc + detail.total, 0); // tính tổng amount
+          const initialAmount = enrichedOrderDetailsData.reduce((acc, detail) => acc + detail.total, 0); // tính tổng amount ban đầu
+          const discountAmount = initialAmount * voucherData.discount; // tính tiền được giảm
+          const payableAmount = initialAmount - discountAmount; // tính tiền phải trả
 
           const data = {
             ...order,
-            memberName: memberData,
-            voucherName: voucherData,
+            memberData,
+            voucherName: voucherData.title,
+            voucherDiscount: voucherData.discount,
             orderDetails: enrichedOrderDetailsData,
-            amount: totalAmount, // cập nhật amount
+            initialAmount, // thêm initialAmount
+            discountAmount, // thêm discountAmount
+            payableAmount, // thêm payableAmount
+            address: memberData.address, // thêm địa chỉ
           };
 
           setOrderDetail(data as OrderDetail);
@@ -83,12 +95,14 @@ const OrderDetailComponent: React.FC = () => {
       }
     }
   };
+
   const formatCurrency = (value: number) => {
     return new Intl.NumberFormat('vi-VN', {
       style: 'currency',
       currency: 'VND',
     }).format(value);
   };
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -105,27 +119,28 @@ const OrderDetailComponent: React.FC = () => {
 
   return (
     <div className="order-detail-container">
-      <h2>Order Detail</h2>
+      <h2>Chi tiết đơn hàng</h2>
 
       <div className="stats-cards">
-        <StatsCard color="#f54242" icon={FaUser} title="Customer Name" value={orderDetail.memberName ?? 'Unknown'} />
-        <StatsCard color="#f5a442" icon={FaCalendar} title="Order Date" value={orderDetail.dateCreate} />
-        <StatsCard color="#f5d142" icon={FaShoppingCart} title="Items Count" value={itemsCount.toString()} />
-        <StatsCard color="#42f554" icon={FaMoneyBill} title="Total Amount" value={formatCurrency(orderDetail.amount)} />
+        <StatsCard color="#f54242" icon={FaUser} title="Tên khách hàng" value={orderDetail.memberName ?? 'Không xác định'} />
+        <StatsCard color="#f5a442" icon={FaCalendar} title="Ngày đặt hàng" value={orderDetail.dateCreate} />
+        <StatsCard color="#f5d142" icon={FaShoppingCart} title="Số lượng mặt hàng" value={itemsCount.toString()} />
+        <StatsCard color="#42f554" icon={FaMoneyBill} title="Thành tiền" value={formatCurrency(orderDetail.payableAmount)} />
       </div>
 
-      <h3>Address</h3>
+      <h3>Địa chỉ</h3>
       <p>{orderDetail.address ?? 'N/A'}</p>
       <div className="order-items-status-container">
         <div className="order-items-container">
-          <h3>Order Items</h3>
+          <h3>Sản phẩm trong đơn hàng</h3>
           <table className="order-items-table">
             <thead>
               <tr>
-                <th>Product Name</th>
-                <th>Product Image</th>
-                <th>Quantity</th>
-                <th>Total</th> {/* Đổi thành Total */}
+                <th>Tên sản phẩm</th>
+                <th>Hình ảnh sản phẩm</th>
+                <th>Số lượng</th>
+                <th>Đơn giá</th>
+                <th>Thành tiền</th> {/* Đổi thành Thành tiền */}
               </tr>
             </thead>
             <tbody>
@@ -134,6 +149,7 @@ const OrderDetailComponent: React.FC = () => {
                   <td>{item.productName}</td>
                   <td><img src={item.productImage} alt={item.productName} width="50" height="50" /></td>
                   <td>{item.quantity}</td>
+                  <td>{formatCurrency(item.unitPrice)}</td> {/* Tính và hiển thị đơn giá */}
                   <td>{formatCurrency(item.total)}</td> {/* Đổi thành total */}
                 </tr>
               ))}
@@ -141,26 +157,30 @@ const OrderDetailComponent: React.FC = () => {
           </table>
         </div>
         <div className="order-status-container">
-          <h3>Order Status</h3>
-          <p><strong>Order ID:</strong> {orderDetail.orderId}</p>
-          <p><strong>Status:</strong> {orderDetail.orderStatus}</p>
+          <h3>Trạng thái đơn hàng</h3>
+          <p><strong>Mã đơn hàng:</strong> {orderDetail.orderId}</p>
+          <p><strong>Trạng thái:</strong> {orderDetail.orderStatus}</p>
 
           <div className="update-status-section">
-            <label htmlFor="status">Update Status:</label>
+            <label htmlFor="status">Cập nhật trạng thái:</label>
             <select id="status" value={newStatus} onChange={handleStatusChange}>
-              <option value="">Select Status</option>
-              <option value="Pending">Pending</option>
-              <option value="Processing">Processing</option>
-              <option value="Shipped">Shipped</option>
-              <option value="Delivered">Delivered</option>
-              <option value="Cancelled">Cancelled</option>
+              <option value="">Chọn trạng thái</option>
+              <option value="Pending">Đang chờ xử lý</option>
+              <option value="Processing">Đang xử lý</option>
+              <option value="Shipped">Đã giao hàng</option>
+              <option value="Delivered">Đã nhận hàng</option>
+              <option value="Cancelled">Đã hủy</option>
             </select>
-            <button onClick={handleUpdateStatus}>Update Status</button>
+            <button onClick={handleUpdateStatus}>Cập nhật</button>
           </div>
         </div>
       </div>
-      <h3>Total Amount</h3>
-      <p>{formatCurrency(orderDetail.amount)}</p> {/* Hiển thị total amount */}
+      <h3>Thành tiền</h3>
+      <div className="amount-details">
+        <p><strong>Tiền ban đầu:</strong> {formatCurrency(orderDetail.initialAmount)}</p>
+        <p><strong>Tiền được giảm:</strong> {formatCurrency(orderDetail.discountAmount)}</p>
+        <p><strong>Tiền phải trả:</strong> {formatCurrency(orderDetail.payableAmount)}</p>
+      </div>
     </div>
   );
 };

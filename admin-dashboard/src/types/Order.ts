@@ -16,6 +16,9 @@ export interface Order {
 
 export interface OrderDetail extends Order {
   // Các thuộc tính đặc biệt của OrderDetail nếu cần
+  initialAmount: number; // 
+  discountAmount: number; // 
+  payableAmount: number;
 }
 
 export interface OrderItem {
@@ -25,6 +28,6 @@ export interface OrderItem {
   productName?: string; // Thêm tên sản phẩm
   productImage?: string; // Thêm ảnh sản phẩm
   quantity: number;
-  price?: number; // Giá sản phẩm (có thể là optional)
+  unitPrice: number; // Giá sản phẩm (có thể là optional)
   total: number;
 }
