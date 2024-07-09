@@ -1,0 +1,24 @@
+.revenue-chart-container {
+    width: 50%;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .revenue-chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .revenue-chart-header h2 {
+    margin: 0;
+  }
+  
+  .revenue-chart-header select {
+    padding: 5px;
+    font-size: 16px;
+  }
+  

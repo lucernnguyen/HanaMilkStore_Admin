@@ -4,6 +4,7 @@ import productService from '../api/productService';
 import { Product } from '../../types/Product';
 import './ProductList.css';
 import { Tabs, Tab, Box } from '@mui/material';
+import firebaseService from '../api/firebaseService';
 
 const ProductList: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -65,6 +66,7 @@ const ProductList: React.FC = () => {
       try {
         // Delete all images associated with the product
         for (const picture of productToDelete.milkPictures || []) {
+          await firebaseService.deleteImageFromFirebase(picture.picture); // Assuming picturePath is the path to the image
           await productService.deleteProductImage(picture.milkPictureId);
         }
 
@@ -84,7 +86,12 @@ const ProductList: React.FC = () => {
       console.error('Product not found');
     }
   };
-
+  const formatCurrency = (value: number) => {
+    return new Intl.NumberFormat('vi-VN', {
+      style: 'currency',
+      currency: 'VND',
+    }).format(value);
+  };
   return (
     <div className="product-list-container">
       <h2>Danh sách sản phẩm</h2>
@@ -115,7 +122,7 @@ const ProductList: React.FC = () => {
             products.map(product => (
               <tr key={product.milkId}>
                 <td>{product.milkName}</td>
-                <td>{product.price}</td>
+                <td>{formatCurrency(product.price)}</td>
                 <td>{product.discount}</td>
                 <td className="product-images">
                   {(product.milkPictures || []).map(picture => (

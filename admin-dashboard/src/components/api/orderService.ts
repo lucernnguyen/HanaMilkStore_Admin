@@ -21,7 +21,7 @@ const getAllOrdersNoPagination = async (): Promise<Order[]> => {
 };
 const getNewestOrders = async () : Promise<Order[]> => {
   try{
-    const response = await axios.get(`${API_URL}?IsDescending=true&pageIndex=4`)
+    const response = await axios.get(`${API_URL}?IsDescending=true&pageIndex=1&pageSize=4`)
     const orders = response.data;
 
     // Lấy thông tin khách hàng và đếm số lượng sản phẩm

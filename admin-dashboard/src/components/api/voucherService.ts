@@ -17,8 +17,9 @@ const createVoucher = async (voucher: NewVoucher): Promise<void> => {
   await axios.post(API_URL, voucher);
 };
 
-export default {
+const voucherService = {
   getAllVouchers,
   deleteVoucher,
   createVoucher,
-};
+}
+export default  voucherService;

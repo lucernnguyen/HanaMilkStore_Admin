@@ -83,7 +83,12 @@ const OrderDetailComponent: React.FC = () => {
       }
     }
   };
-
+  const formatCurrency = (value: number) => {
+    return new Intl.NumberFormat('vi-VN', {
+      style: 'currency',
+      currency: 'VND',
+    }).format(value);
+  };
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -106,7 +111,7 @@ const OrderDetailComponent: React.FC = () => {
         <StatsCard color="#f54242" icon={FaUser} title="Customer Name" value={orderDetail.memberName ?? 'Unknown'} />
         <StatsCard color="#f5a442" icon={FaCalendar} title="Order Date" value={orderDetail.dateCreate} />
         <StatsCard color="#f5d142" icon={FaShoppingCart} title="Items Count" value={itemsCount.toString()} />
-        <StatsCard color="#42f554" icon={FaMoneyBill} title="Total Amount" value={orderDetail.amount.toString()} />
+        <StatsCard color="#42f554" icon={FaMoneyBill} title="Total Amount" value={formatCurrency(orderDetail.amount)} />
       </div>
 
       <h3>Address</h3>
@@ -129,7 +134,7 @@ const OrderDetailComponent: React.FC = () => {
                   <td>{item.productName}</td>
                   <td><img src={item.productImage} alt={item.productName} width="50" height="50" /></td>
                   <td>{item.quantity}</td>
-                  <td>{item.total.toLocaleString('vi-VN')}</td> {/* Đổi thành total */}
+                  <td>{formatCurrency(item.total)}</td> {/* Đổi thành total */}
                 </tr>
               ))}
             </tbody>
@@ -155,7 +160,7 @@ const OrderDetailComponent: React.FC = () => {
         </div>
       </div>
       <h3>Total Amount</h3>
-      <p>{orderDetail.amount.toLocaleString('vi-VN')}</p> {/* Hiển thị total amount */}
+      <p>{formatCurrency(orderDetail.amount)}</p> {/* Hiển thị total amount */}
     </div>
   );
 };

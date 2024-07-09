@@ -14,7 +14,7 @@ const Header: React.FC<HeaderProps> = ({ pageTitle }) => {    return (
             <FontAwesomeIcon icon={faBell} className="icon" />
             <div className="admin-info">
                 <span className="admin-name">Admin Name</span>
-                <img src="path/to/admin-photo.jpg" alt="Admin Photo" className="admin-photo" />
+                <img src="path/to/admin-photo.jpg" alt="Admin" className="admin-photo" />
             </div>
         </div>
     );

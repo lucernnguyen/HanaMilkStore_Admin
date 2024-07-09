@@ -1,8 +1,8 @@
-// Dashboard.tsx
 import React, { useEffect, useState } from 'react';
 import StatsCard from '../StatsCard/StatsCard';
 import LatestOrders from '../LatestOrder/LatestOrder';
 import NewCustomers from '../NewCustomer/NewCustomer';
+import RevenueChart from '../RevenueChart/RevenueChart';
 import { FaDollarSign, FaUsers, FaClipboardList, FaBoxOpen } from 'react-icons/fa';
 
 import './Dashboard.css';
@@ -21,6 +21,7 @@ const Dashboard: React.FC = () => {
   const [stats, setStats] = useState<Stats | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [revenueData, setRevenueData] = useState<any>(null);
 
   useEffect(() => {
     const fetchStats = async () => {
@@ -42,6 +43,30 @@ const Dashboard: React.FC = () => {
           totalOrders,
           totalProducts
         });
+
+        // Group orders by date and calculate total revenue for each date
+        const revenueByDate = orders.reduce((acc: any, order: any) => {
+          const date = new Date(order.dateCreate).toLocaleDateString();
+          if (!acc[date]) acc[date] = 0;
+          acc[date] += order.amount;
+          return acc;
+        }, {});
+
+        const labels = Object.keys(revenueByDate).sort((a, b) => new Date(a).getTime() - new Date(b).getTime());
+        const data = labels.map(date => revenueByDate[date]);
+
+        setRevenueData({
+          labels,
+          datasets: [
+            {
+              label: 'Doanh thu',
+              data,
+              borderColor: 'rgba(75,192,192,1)',
+              backgroundColor: 'rgba(75,192,192,0.2)'
+            }
+          ]
+        });
+
       } catch (error) {
         console.error('Error fetching stats:', error);
         setError('Failed to fetch stats. Please try again later.');
@@ -52,6 +77,13 @@ const Dashboard: React.FC = () => {
 
     fetchStats();
   }, []);
+  const formatCurrency = (value: number) => {
+    return new Intl.NumberFormat('vi-VN', {
+      style: 'currency',
+      currency: 'VND',
+    }).format(value);
+  };
+
 
   if (loading) {
     return <div>Loading...</div>;
@@ -64,34 +96,41 @@ const Dashboard: React.FC = () => {
   return (
     <div className="main-content">
       <div className="stats-cards">
-        <StatsCard 
-          color="green" 
-          icon={FaDollarSign}  
-          title="Tổng doanh thu" 
-          value={`${stats ? stats.totalRevenue : 0} Đồng`} 
+        <StatsCard
+          color="green"
+          icon={FaDollarSign}
+          title="Tổng doanh thu"
+          value={`${stats ? formatCurrency(stats.totalRevenue) : formatCurrency(0)}`}
         />
-        <StatsCard 
-          color="pink" 
-          icon={FaUsers}  
-          title="Tổng số khách hàng" 
-          value={stats ? stats.totalCustomers.toString() : '0'} 
+        <StatsCard
+          color="pink"
+          icon={FaUsers}
+          title="Tổng số khách hàng"
+          value={stats ? stats.totalCustomers.toString() : '0'}
         />
-        <StatsCard 
-          color="yellow" 
-          icon={FaClipboardList}  
-          title="Tổng số đơn đặt hàng" 
-          value={stats ? stats.totalOrders.toString() : '0'} 
+        <StatsCard
+          color="yellow"
+          icon={FaClipboardList}
+          title="Tổng số đơn đặt hàng"
+          value={stats ? stats.totalOrders.toString() : '0'}
         />
-        <StatsCard 
-          color="blue" 
-          icon={FaBoxOpen}  
-          title="Tổng số sản phẩm" 
-          value={stats ? stats.totalProducts.toString() : '0'} 
+        <StatsCard
+          color="blue"
+          icon={FaBoxOpen}
+          title="Tổng số sản phẩm"
+          value={stats ? stats.totalProducts.toString() : '0'}
         />
       </div>
       <div className="dashboard-content">
-        <LatestOrders />
-        <NewCustomers />
+        <div className="latest-orders">
+          <LatestOrders />
+        </div>
+        <div className="revenue-and-customers">
+          <RevenueChart data={revenueData} />
+          <div className="new-customers">
+            <NewCustomers />
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -31,7 +31,12 @@ const OrderList: React.FC = () => {
       setPage(prevPage => prevPage - 1);
     }
   };
-
+  const formatCurrency = (value: number) => {
+    return new Intl.NumberFormat('vi-VN', {
+      style: 'currency',
+      currency: 'VND',
+    }).format(value);
+  };
  
 
   return (
@@ -55,7 +60,7 @@ const OrderList: React.FC = () => {
               <td>
               <Link to={`/order-detail/${order.orderId}`}>Xem chi tiết</Link>
               </td>
-              <td>{order.amount}</td>
+              <td>{formatCurrency(order.amount)}</td>
               <td>{order.orderStatus}</td>
             </tr>
           ))}

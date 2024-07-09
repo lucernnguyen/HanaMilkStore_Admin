@@ -1,29 +1,51 @@
-.dashboard {
-    display: flex;
-  }
-  
-  .content {
-    flex-grow: 1;
-    padding: 20px;
-  }
-  
-  .main-content {
-    padding-top: 20px;
-  }
-  
-  .stats-cards {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    width: 100%;
-    margin-bottom: 20px;
+.main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
-  .dashboard-content {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .dashboard-content > div {
-    width: 48%;
-  }
-  
+
+.stats-cards {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.dashboard-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.latest-orders {
+  width: 90%; /* Adjust width to fit the screen */
+  margin: 0 auto; /* Center the LatestOrders component */
+  margin-bottom: 5px; /* Add some space below */
+}
+
+.revenue-and-customers {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  margin: 0 auto; /* Center the container */
+}
+
+.new-customers, .revenue-chart {
+  width: 48%;
+}
+
+.latest-orders table {
+  width: 100%; /* Make the table take the full width of its container */
+}
+
+.latest-orders th, .latest-orders td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.latest-orders th {
+  background-color: #f2f2f2;
+}

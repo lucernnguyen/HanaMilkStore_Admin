@@ -24,7 +24,12 @@ const LatestOrders: React.FC = () => {
 
     fetchLatestOrders();
   }, []);
-
+  const formatCurrency = (value: number) => {
+    return new Intl.NumberFormat('vi-VN', {
+      style: 'currency',
+      currency: 'VND',
+    }).format(value);
+  };
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -52,7 +57,7 @@ const LatestOrders: React.FC = () => {
               <td>{order.memberName}</td>
               <td>{order.dateCreate}</td>
               <td>{order.itemsCount} items</td>
-              <td>{order.amount.toLocaleString('vi-VN')} Đồng</td>
+              <td>{formatCurrency(order.amount)}</td>
               <td>
                 <Link to={`/order-detail/${order.orderId}`}>
                   <button>Chi tiết</button>

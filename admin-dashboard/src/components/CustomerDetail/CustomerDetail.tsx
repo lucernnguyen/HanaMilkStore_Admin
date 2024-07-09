@@ -30,7 +30,12 @@ const CustomerDetail: React.FC = () => {
 
     fetchMemberDetails();
   }, [id]);
-
+  const formatCurrency = (value: number) => {
+    return new Intl.NumberFormat('vi-VN', {
+      style: 'currency',
+      currency: 'VND',
+    }).format(value);
+  };
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -72,7 +77,7 @@ const CustomerDetail: React.FC = () => {
               <td>{order.dateCreate}</td>
               <td>
               <Link to={`/order-detail/${order.orderId}`}>Xem chi tiết</Link>              </td>
-              <td>{order.amount}</td>
+              <td>{formatCurrency(order.amount)}</td>
               <td>{order.orderStatus}</td>
             </tr>
           ))}
