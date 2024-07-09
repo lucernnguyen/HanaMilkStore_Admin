@@ -19,8 +19,7 @@ const OrderDetailComponent: React.FC = () => {
   useEffect(() => {
     const fetchOrderDetail = async () => {
       try {
-        const allOrders = await orderService.getAllOrders();
-        const order = allOrders.find(order => order.orderId === Number(id));
+        const order = await orderService.getOrderById(Number(id));
 
         if (order && order.orderDetails) {
           const memberData = await orderService.getMemberNameById(order.memberId);

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Customer } from '../../types/User';
+import { Member } from '../../types/User';
 
 const API_URL = 'https://localhost:7188/api/members';
 
@@ -13,7 +13,7 @@ const getAllCustomers = async () => {
   }
 };
 
-const getCustomerById =  async (id: number): Promise<Customer> => {
+const getCustomerById =  async (id: number): Promise<Member> => {
   const response = await axios.get(`${API_URL}/${id}`);
   return response.data;
 };

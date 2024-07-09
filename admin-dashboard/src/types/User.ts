@@ -1,3 +1,4 @@
+import { Order } from "./Order";
 export interface User {
     userId: number;
     userName: string;
@@ -20,4 +21,5 @@ export interface User {
     memberId: number;
     userId: number;
     desciption: string;
+    orders: Order[]; // Include the orders property
   }

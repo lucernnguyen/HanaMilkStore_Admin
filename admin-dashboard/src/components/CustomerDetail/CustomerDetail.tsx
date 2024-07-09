@@ -1,42 +1,34 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-
+import { useParams, Link } from 'react-router-dom';
 import './CustomerDetail.css';
-import { Order } from '../../types/Order';
-import { Customer, User } from '../../types/User';
-import customerService from '../api/customerService';
-import orderService from '../api/orderService';
+import { Member, User } from '../../types/User';
 import userService from '../api/userService';
+import customerService from '../api/customerService';
 
 const CustomerDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const [customer, setCustomer] = useState<Customer | null>(null);
+  const [member, setMember] = useState<Member | null>(null);
   const [user, setUser] = useState<User | null>(null);
-  const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchCustomerDetails = async () => {
+    const fetchMemberDetails = async () => {
       try {
-        const customerData: Customer = await customerService.getCustomerById(Number(id));
-        setCustomer(customerData);
+        const memberData: Member = await customerService.getCustomerById(Number(id));
+        setMember(memberData);
 
-        const userData: User = await userService.getUserById(customerData.userId);
+        const userData: User = await userService.getUserById(memberData.userId);
         setUser(userData);
-
-        const allOrders: Order[] = await orderService.getAllOrders();
-        const customerOrders = allOrders.filter(order => order.memberId === Number(id));
-        setOrders(customerOrders);
       } catch (error) {
-        console.error('Error fetching customer details:', error);
-        setError('Failed to fetch customer details. Please try again later.');
+        console.error('Error fetching member details:', error);
+        setError('Failed to fetch member details. Please try again later.');
       } finally {
         setLoading(false);
       }
     };
 
-    fetchCustomerDetails();
+    fetchMemberDetails();
   }, [id]);
 
   if (loading) {
@@ -47,13 +39,15 @@ const CustomerDetail: React.FC = () => {
     return <div>{error}</div>;
   }
 
-  if (!customer || !user) {
-    return <div>Customer details not found.</div>;
+  if (!member || !user) {
+    return <div>Member details not found.</div>;
   }
+
+  
 
   return (
     <div className="customer-detail-container">
-      <h1>Chi tiết khách hàng</h1>
+      <h1>Chi tiết thành viên</h1>
       <div className="card">
         <h2>{user.userName}</h2>
         <p>Điện thoại: {user.phone}</p>
@@ -66,15 +60,20 @@ const CustomerDetail: React.FC = () => {
           <tr>
             <th>ID Đơn hàng</th>
             <th>Ngày</th>
+            <th>Giỏ hàng</th>
             <th>Tổng</th>
+            <th>Trạng thái</th>
           </tr>
         </thead>
         <tbody>
-          {orders.map(order => (
+          {member.orders.map(order => (
             <tr key={order.orderId}>
               <td>{order.orderId}</td>
               <td>{order.dateCreate}</td>
+              <td>
+              <Link to={`/order-detail/${order.orderId}`}>Xem chi tiết</Link>              </td>
               <td>{order.amount}</td>
+              <td>{order.orderStatus}</td>
             </tr>
           ))}
         </tbody>

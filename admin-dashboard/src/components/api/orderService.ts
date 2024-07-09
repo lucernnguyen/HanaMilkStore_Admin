@@ -11,14 +11,13 @@ const VOUCHER_API_URL = 'https://localhost:7188/api/vouchers';
 const USER_API_URL = 'https://localhost:7188/api/users';
 
                  
-const getAllOrders = async (): Promise<Order[]> => {
-  try {
-    const response = await axios.get(API_URL);
-    return response.data;
-  } catch (error) {
-    console.error('Error in getAllOrders:', error);
-    throw error;
-  }
+const getAllOrders = async (page: number, pageSize: number): Promise<Order[]> => {
+  const response = await axios.get(`${API_URL}?pageIndex=${page}&pageSize=${pageSize}`);
+  return response.data;
+};
+const getAllOrdersNoPagination = async (): Promise<Order[]> => {
+  const response = await axios.get(`${API_URL}`);
+  return response.data;
 };
 const getNewestOrders = async () : Promise<Order[]> => {
   try{
@@ -102,10 +101,10 @@ const orderService = {
   getMemberNameById,
   getVoucherNameById,
   updateOrderStatus,
- // getOrdersByCustomerId,
  getNewestOrders,
  getProductDetailsByOrderDetailId,
- getOrderDetailsById
+ getOrderDetailsById,
+  getAllOrdersNoPagination
 };
 
 export default orderService;

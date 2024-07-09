@@ -26,7 +26,7 @@ const Dashboard: React.FC = () => {
     const fetchStats = async () => {
       try {
         const [orders, customers, products] = await Promise.all([
-          orderService.getAllOrders(),
+          orderService.getAllOrdersNoPagination(),
           customerService.getAllCustomers(),
           productService.getAllProductsWithouFilter()
         ]);
