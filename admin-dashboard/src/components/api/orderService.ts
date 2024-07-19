@@ -15,6 +15,11 @@ const getAllOrders = async (page: number, pageSize: number): Promise<Order[]> =>
   const response = await axios.get(`${API_URL}?pageIndex=${page}&pageSize=${pageSize}`);
   return response.data;
 };
+const getOrdersByOrderStatus = async (page: number, pageSize: number, status: string) => {
+  const statusQuery = status ? `&orderStatus=${encodeURIComponent(status)}` : '';
+  const response = await axios.get(`${API_URL}?pageIndex=${page}&pageSize=${pageSize}${statusQuery}`);
+  return response.data;
+};
 const getAllOrdersNoPagination = async (): Promise<Order[]> => {
   const response = await axios.get(`${API_URL}`);
   return response.data;
@@ -104,7 +109,8 @@ const orderService = {
  getNewestOrders,
  getProductDetailsByOrderDetailId,
  getOrderDetailsById,
-  getAllOrdersNoPagination
+  getAllOrdersNoPagination,
+  getOrdersByOrderStatus
 };
 
 export default orderService;

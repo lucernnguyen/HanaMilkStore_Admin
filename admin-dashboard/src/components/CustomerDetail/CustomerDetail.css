@@ -1,15 +1,17 @@
 .customer-detail-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  font-family: 'Arial', sans-serif;
 }
 
 .customer-detail-container h1 {
   text-align: center;
   color: #333;
+  margin-bottom: 20px;
 }
 
 .customer-detail-container .card {
@@ -28,6 +30,7 @@
 .customer-detail-container .card p {
   margin: 5px 0;
   color: #555;
+  line-height: 1.6;
 }
 
 .customer-detail-container table {
@@ -53,5 +56,23 @@
 }
 
 .customer-detail-container tr:hover {
-  background-color: #ddd;
+  background-color: #e9e9e9;
+}
+
+.customer-detail-container a {
+  color: #007bff;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.customer-detail-container a:hover {
+  color: #0056b3;
+}
+
+.customer-detail-container .loading,
+.customer-detail-container .error {
+  text-align: center;
+  color: #555;
+  font-size: 18px;
+  margin-top: 20px;
 }

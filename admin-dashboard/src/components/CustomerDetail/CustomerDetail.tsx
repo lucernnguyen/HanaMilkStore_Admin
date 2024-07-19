@@ -30,25 +30,25 @@ const CustomerDetail: React.FC = () => {
 
     fetchMemberDetails();
   }, [id]);
+
   const formatCurrency = (value: number) => {
     return new Intl.NumberFormat('vi-VN', {
       style: 'currency',
       currency: 'VND',
     }).format(value);
   };
+
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className="loading">Loading...</div>;
   }
 
   if (error) {
-    return <div>{error}</div>;
+    return <div className="error">{error}</div>;
   }
 
   if (!member || !user) {
-    return <div>Member details not found.</div>;
+    return <div className="error">Member details not found.</div>;
   }
-
-  
 
   return (
     <div className="customer-detail-container">
@@ -76,7 +76,8 @@ const CustomerDetail: React.FC = () => {
               <td>{order.orderId}</td>
               <td>{order.dateCreate}</td>
               <td>
-              <Link to={`/order-detail/${order.orderId}`}>Xem chi tiết</Link>              </td>
+                <Link to={`/order-detail/${order.orderId}`}>Xem chi tiết</Link>
+              </td>
               <td>{formatCurrency(order.amount)}</td>
               <td>{order.orderStatus}</td>
             </tr>

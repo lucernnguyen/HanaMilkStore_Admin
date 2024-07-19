@@ -53,7 +53,7 @@ const OrderDetailComponent: React.FC = () => {
 
           const data = {
             ...order,
-            memberData,
+            memberName: memberData.userName,
             voucherName: voucherData.title,
             voucherDiscount: voucherData.discount,
             orderDetails: enrichedOrderDetailsData,
