@@ -1,0 +1,135 @@
+/* login.css */
+.login-body {
+    background-image: url('https://firebasestorage.googleapis.com/v0/b/imageuploadv3.appspot.com/o/LoginBackRound%2Fblackgroup.jpg?alt=media&token=baad803b-55ac-4018-8533-098c206dddee');
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 204vh;
+  }
+  
+  .logoLogin {
+    position: absolute;
+    top: 5%;
+    left: 4%;
+  }
+  
+  .w-1 {
+    width: 41%;
+    margin: auto;
+  }
+  
+  .w-2 {
+    width: 97%;
+    margin: auto;
+  }
+  
+  .flex {
+    display: flex;
+  }
+  
+  .flex-col {
+    flex-direction: column;
+  }
+  
+  .gap-4 {
+    gap: 1rem;
+  }
+  
+  .rounded-lg {
+    border-radius: 0.5rem;
+  }
+  
+  .p-4 {
+    padding: 1rem;
+  }
+  
+  .text-center {
+    text-align: center;
+  }
+  
+  .leading-normal {
+    line-height: 1.5;
+  }
+  
+  .text-black {
+    color: #000;
+  }
+  
+  .font-medium {
+    font-weight: 500;
+  }
+  
+  .text-3xl {
+    font-size: 1.875rem;
+  }
+  
+  .mb-6 {
+    margin-bottom: 1.5rem;
+  }
+  
+  .bg-white {
+    background-color: #fff;
+  }
+  
+  .btn-custom {
+    width: 100%;
+    display: flex;
+    gap: 0.25rem;
+    align-items: center;
+    justify-content: center;
+    padding-top: 0.625rem;
+    padding-bottom: 0.625rem;
+    border-radius: 0.25rem;
+    background-color: #fff;
+    color: #000;
+  }
+  
+  .btn-custom:hover {
+    cursor: pointer;
+  }
+  
+  .btn-custom:disabled {
+    background-color: #ccc;
+  }
+  
+  .btn-custom.accepted {
+    background-color: #ff69b4;
+    color: #fff;
+  }
+  
+  .otp-input-custom input {
+    text-align: center;
+    font-size: 1.25rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    margin: 0.5rem;
+    border-radius: 0.25rem;
+    border: 1px solid #000000;
+  }
+  
+  .otp-input-custom input:focus {
+    border-color: #ff69b4;
+    outline: none;
+  }
+  
+  .terms-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Đặt phần tử ở bên trái */
+    gap: 0.5rem; /* Khoảng cách giữa checkbox và nhãn */
+    margin-top: 1rem; /* Khoảng cách trên cho phần tử này */  
+  }
+  
+  /* Đảm bảo các kiểu CSS cho checkbox và nhãn */
+  .terms-container input[type="checkbox"] {
+    margin: 0;
+    
+  }
+  
+  .terms-container label {
+    margin: 0;
+  
+  }
+  
+  

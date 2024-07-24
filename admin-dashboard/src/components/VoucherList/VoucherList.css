@@ -4,18 +4,24 @@
   
   .voucher-list-table {
     width: 100%;
-    border-collapse: collapse;
+  border-collapse: collapse;
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
   
   .voucher-list-table th,
   .voucher-list-table td {
-    border: 1px solid #ddd;
-    padding: 8px;
+    padding: 12px 15px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
   }
   
   .voucher-list-table th {
-    background-color: #f2f2f2;
-    text-align: left;
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
   }
   
   .voucher-list-table tr:hover {
@@ -31,4 +37,12 @@
   .pagination button {
     padding: 5px 10px;
   }
-  
+  .dialog-action-buttons button{
+    padding: 10px 20px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+  }

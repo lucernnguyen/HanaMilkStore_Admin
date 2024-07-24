@@ -5,18 +5,23 @@
   .latest-orders table {
     width: 100%;
     border-collapse: collapse;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
   
   .latest-orders th, 
   .latest-orders td {
-    padding: 10px;
-    border: 1px solid #ddd;
-    text-align: left;
+    padding: 12px 15px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
   }
   
   .latest-orders th {
-    background-color: #f4f4f4;
-  }
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;  }
   
   .latest-orders button {
     background-color: #3498db;

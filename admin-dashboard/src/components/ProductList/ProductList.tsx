@@ -5,6 +5,7 @@ import { Product } from '../../types/Product';
 import './ProductList.css';
 import { Tabs, Tab, Box } from '@mui/material';
 import firebaseService from '../api/firebaseService';
+import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 
 const ProductList: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -86,12 +87,14 @@ const ProductList: React.FC = () => {
       console.error('Product not found');
     }
   };
+
   const formatCurrency = (value: number) => {
     return new Intl.NumberFormat('vi-VN', {
       style: 'currency',
       currency: 'VND',
     }).format(value);
   };
+
   return (
     <div className="product-list-container">
       <h2>Danh sách sản phẩm</h2>
@@ -105,6 +108,7 @@ const ProductList: React.FC = () => {
           <Tab label="Sữa Bột" value={1} className="milk-powder-tab" />
           <Tab label="Sữa Tươi" value={2} className="fresh-milk-tab" />
           <Tab label="Sữa Chua" value={3} className="yogurt-tab" />
+          <Tab label="Sữa Hạt Dinh Dưỡng" value={4} className="nutritious-nut-milk-tab" />
         </Tabs>
       </Box>
       <table className="product-list-table">
@@ -130,8 +134,8 @@ const ProductList: React.FC = () => {
                   ))}
                 </td>
                 <td>
-                  <button onClick={() => handleEdit(product.milkId)}>Sửa</button>
-                  <button onClick={() => handleDelete(product.milkId)}>Xóa</button>
+                  <FaEdit className="icon-edit" onClick={() => handleEdit(product.milkId)} />
+                  <FaTrashAlt className="icon-delete" onClick={() => handleDelete(product.milkId)} />
                 </td>
               </tr>
             ))

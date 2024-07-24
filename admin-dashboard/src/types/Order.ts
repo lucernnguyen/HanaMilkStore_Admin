@@ -8,7 +8,8 @@ export interface Order {
   voucherName?: string; // Thêm ? để voucherName có thể là optional
   dateCreate: string;
   amount: number;
-  orderStatus: string;
+  statusId: number;
+  orderStatus: number;
   address?: string; // Địa chỉ của khách hàng
   orderDetails: OrderItem[]; // Danh sách chi tiết đơn hàng
   itemsCount?: number; // Số lượng sản phẩm trong đơn hàng

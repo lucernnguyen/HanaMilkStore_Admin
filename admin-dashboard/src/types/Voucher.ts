@@ -1,12 +1,12 @@
 // Voucher.ts
 export interface Voucher {
-  voucherId?: number; // Making voucherId optional
+  voucherId?: number;  // voucherId là tùy chọn
   title: string;
   startDate: string;
   endDate: string;
   discount: number;
   quantity: number;
-  status: string;
+  voucherStatusId: number;  // voucherStatusId là bắt buộc
 }
 
 export interface NewVoucher {
@@ -15,5 +15,5 @@ export interface NewVoucher {
   endDate: string;
   discount: number;
   quantity: number;
-  status: string;
+  voucherStatusId: number;  // voucherStatusId là bắt buộc
 }

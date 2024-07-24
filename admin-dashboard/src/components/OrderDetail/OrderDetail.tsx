@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import orderService from '../api/orderService';
+import statusService from '../api/statusService';
 import { OrderDetail, OrderItem } from '../../types/Order';
-
 import './OrderDetail.css';
 import { FaUser, FaCalendar, FaShoppingCart, FaMoneyBill } from 'react-icons/fa';
 import StatsCard from '../StatsCard/StatsCard';
@@ -18,6 +18,8 @@ const OrderDetailComponent: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [newStatus, setNewStatus] = useState<string>('');
+  const [statuses, setStatuses] = useState<{ statusId: number, status: string }[]>([]);
+  const [statusId, setStatusId] = useState<number>(0);
 
   useEffect(() => {
     const fetchOrderDetail = async () => {
@@ -37,19 +39,19 @@ const OrderDetailComponent: React.FC = () => {
 
           const enrichedOrderDetailsData = orderDetailsData.map(detail => {
             const milk = allMilks.find(milk => milk.milkId === detail.milkId);
-            const unitPrice = milk?.price ?? 0; // Đơn giá lấy từ milk hoặc mặc định là 0
+            const unitPrice = milk?.price ?? 0;
             return {
               ...detail,
               productName: milk?.milkName ?? 'Unknown',
               productImage: milk?.milkPictures[0]?.picture ?? 'path/to/default-image.png',
               unitPrice,
-              total: milk ? milk.price * detail.quantity : detail.total // tính lại total
+              total: milk ? milk.price * detail.quantity : detail.total
             };
           });
 
-          const initialAmount = enrichedOrderDetailsData.reduce((acc, detail) => acc + detail.total, 0); // tính tổng amount ban đầu
-          const discountAmount = initialAmount * voucherData.discount; // tính tiền được giảm
-          const payableAmount = initialAmount - discountAmount; // tính tiền phải trả
+          const initialAmount = enrichedOrderDetailsData.reduce((acc, detail) => acc + detail.total, 0);
+          const discountAmount = initialAmount * voucherData.discount;
+          const payableAmount = initialAmount - discountAmount;
 
           const data = {
             ...order,
@@ -57,13 +59,15 @@ const OrderDetailComponent: React.FC = () => {
             voucherName: voucherData.title,
             voucherDiscount: voucherData.discount,
             orderDetails: enrichedOrderDetailsData,
-            initialAmount, // thêm initialAmount
-            discountAmount, // thêm discountAmount
-            payableAmount, // thêm payableAmount
-            address: memberData.address, // thêm địa chỉ
+            initialAmount,
+            discountAmount,
+            payableAmount,
+            address: memberData.address,
           };
 
           setOrderDetail(data as OrderDetail);
+          setNewStatus(order.statusId.toString());
+          setStatusId(order.statusId);
         } else {
           console.error('No order found with the provided id');
           setError('No order found with the provided id. Please check the id and try again.');
@@ -76,17 +80,31 @@ const OrderDetailComponent: React.FC = () => {
       }
     };
 
+    const fetchStatuses = async () => {
+      try {
+        const data = await statusService.getAllStatuses();
+        setStatuses(data);
+      } catch (error) {
+        console.error('Error fetching statuses:', error);
+        setStatuses([]);
+      }
+    };
+
     fetchOrderDetail();
+    fetchStatuses();
   }, [id]);
 
   const handleStatusChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setNewStatus(e.target.value);
+    const selectedStatusId = parseInt(e.target.value, 10);
+    setNewStatus(selectedStatusId.toString());
+    setStatusId(selectedStatusId);
   };
 
   const handleUpdateStatus = async () => {
     if (orderDetail) {
       try {
-        await orderService.updateOrderStatus(orderDetail.orderId, newStatus);
+        // Assuming the new method signature includes voucherId
+        await orderService.updateOrderStatus(orderDetail.orderId, statusId, orderDetail.voucherId);
         const updatedOrderDetail = await orderService.getOrderById(orderDetail.orderId);
         setOrderDetail(updatedOrderDetail);
       } catch (error) {
@@ -94,6 +112,11 @@ const OrderDetailComponent: React.FC = () => {
         setError('Failed to update order status. Please try again later.');
       }
     }
+  };
+
+  const getStatusName = (statusId: number) => {
+    const status = statuses.find(status => status.statusId === statusId);
+    return status ? status.status : 'Unknown';
   };
 
   const formatCurrency = (value: number) => {
@@ -140,7 +163,7 @@ const OrderDetailComponent: React.FC = () => {
                 <th>Hình ảnh sản phẩm</th>
                 <th>Số lượng</th>
                 <th>Đơn giá</th>
-                <th>Thành tiền</th> {/* Đổi thành Thành tiền */}
+                <th>Thành tiền</th>
               </tr>
             </thead>
             <tbody>
@@ -149,8 +172,8 @@ const OrderDetailComponent: React.FC = () => {
                   <td>{item.productName}</td>
                   <td><img src={item.productImage} alt={item.productName} width="50" height="50" /></td>
                   <td>{item.quantity}</td>
-                  <td>{formatCurrency(item.unitPrice)}</td> {/* Tính và hiển thị đơn giá */}
-                  <td>{formatCurrency(item.total)}</td> {/* Đổi thành total */}
+                  <td>{formatCurrency(item.unitPrice)}</td>
+                  <td>{formatCurrency(item.total)}</td>
                 </tr>
               ))}
             </tbody>
@@ -159,17 +182,14 @@ const OrderDetailComponent: React.FC = () => {
         <div className="order-status-container">
           <h3>Trạng thái đơn hàng</h3>
           <p><strong>Mã đơn hàng:</strong> {orderDetail.orderId}</p>
-          <p><strong>Trạng thái:</strong> {orderDetail.orderStatus}</p>
+          <p><strong>Trạng thái:</strong> {getStatusName(orderDetail.statusId)}</p>
 
           <div className="update-status-section">
             <label htmlFor="status">Cập nhật trạng thái:</label>
             <select id="status" value={newStatus} onChange={handleStatusChange}>
-              <option value="">Chọn trạng thái</option>
-              <option value="Pending">Đang chờ xử lý</option>
-              <option value="Processing">Đang xử lý</option>
-              <option value="Shipped">Đã giao hàng</option>
-              <option value="Delivered">Đã nhận hàng</option>
-              <option value="Cancelled">Đã hủy</option>
+              {statuses.map(status => (
+                <option key={status.statusId} value={status.statusId}>{status.status}</option>
+              ))}
             </select>
             <button onClick={handleUpdateStatus}>Cập nhật</button>
           </div>

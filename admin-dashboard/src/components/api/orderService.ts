@@ -15,8 +15,8 @@ const getAllOrders = async (page: number, pageSize: number): Promise<Order[]> =>
   const response = await axios.get(`${API_URL}?pageIndex=${page}&pageSize=${pageSize}`);
   return response.data;
 };
-const getOrdersByOrderStatus = async (page: number, pageSize: number, status: string) => {
-  const statusQuery = status ? `&orderStatus=${encodeURIComponent(status)}` : '';
+const getOrdersByOrderStatus = async (page: number, pageSize: number, statusId: number) => {
+  const statusQuery = statusId ? `&orderStatus=${encodeURIComponent(statusId)}` : '';
   const response = await axios.get(`${API_URL}?pageIndex=${page}&pageSize=${pageSize}${statusQuery}`);
   return response.data;
 };
@@ -89,14 +89,15 @@ const getVoucherNameById = async (voucherId: number): Promise<string> => {
   }
 };
 
-const updateOrderStatus = async (orderId: number, status: string): Promise<void> => {
+const updateOrderStatus = async (orderId: number, statusId: number, voucherId?: number): Promise<void> => {
   try {
-    await axios.put(`${API_URL}/${orderId}/status`, { status });
+    await axios.put(`${API_URL}/${orderId}`, { statusId, voucherId }); // Thêm voucherId vào đối tượng
   } catch (error) {
     console.error('Error in updateOrderStatus:', error);
     throw error;
   }
 };
+
 const getProductDetailsByOrderDetailId = (orderDetailId: number) => {
   return axios.get(`${API_URL}/order-details/${orderDetailId}`).then(res => res.data);
 };

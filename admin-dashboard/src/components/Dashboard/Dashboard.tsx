@@ -32,7 +32,9 @@ const Dashboard: React.FC = () => {
           productService.getAllProductsWithouFilter()
         ]);
 
-        const totalRevenue = orders.reduce((sum: number, order: any) => sum + order.amount, 0);
+        const completedOrders = orders.filter((order: any) => order.statusId == 3 );
+
+        const totalRevenue = completedOrders.reduce((sum: number, order: any) => sum + order.amount, 0);
         const totalCustomers = customers.length;
         const totalOrders = orders.length;
         const totalProducts = products.length;
@@ -44,8 +46,8 @@ const Dashboard: React.FC = () => {
           totalProducts
         });
 
-        // Group orders by date and calculate total revenue for each date
-        const revenueByDate = orders.reduce((acc: any, order: any) => {
+        // Group completed orders by date and calculate total revenue for each date
+        const revenueByDate = completedOrders.reduce((acc: any, order: any) => {
           const date = new Date(order.dateCreate).toLocaleDateString();
           if (!acc[date]) acc[date] = 0;
           acc[date] += order.amount;
@@ -77,13 +79,13 @@ const Dashboard: React.FC = () => {
 
     fetchStats();
   }, []);
+  
   const formatCurrency = (value: number) => {
     return new Intl.NumberFormat('vi-VN', {
       style: 'currency',
       currency: 'VND',
     }).format(value);
   };
-
 
   if (loading) {
     return <div>Loading...</div>;

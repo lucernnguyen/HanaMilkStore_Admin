@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import voucherService from '../api/voucherService';
 import './AddVoucher.css';
@@ -10,13 +10,28 @@ const AddVoucher: React.FC = () => {
   const [endDate, setEndDate] = useState('');
   const [discount, setDiscount] = useState<number>(0);
   const [quantity, setQuantity] = useState<number>(0);
-  const [status, setStatus] = useState('ACTIVE');
+  const [voucherStatusId, setVoucherStatusId] = useState<number | null>(null);
+  const [voucherStatuses, setVoucherStatuses] = useState<{ voucherStatusId: number, voucherStatus: string }[]>([]);
   const [error, setError] = useState('');
+
+  useEffect(() => {
+    const fetchVoucherStatuses = async () => {
+      try {
+        const statuses = await voucherService.getAllVoucherStatuses();
+        setVoucherStatuses(statuses);
+        setVoucherStatusId(statuses.length > 0 ? statuses[0].id : null);
+      } catch (error) {
+        console.error('Error fetching voucher statuses:', error);
+      }
+    };
+
+    fetchVoucherStatuses();
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!title || !startDate || !endDate || !discount || !quantity) {
+    if (!title || !startDate || !endDate || !discount || !quantity || voucherStatusId === null) {
       setError('Vui lòng điền đầy đủ thông tin.');
       return;
     }
@@ -32,7 +47,7 @@ const AddVoucher: React.FC = () => {
       endDate,
       discount,
       quantity,
-      status,
+      voucherStatusId,
     };
 
     try {
@@ -99,12 +114,15 @@ const AddVoucher: React.FC = () => {
             <label>
               Trạng Thái:
               <select
-                value={status}
-                onChange={(e) => setStatus(e.target.value)}
+                value={voucherStatusId ?? ''}
+                onChange={(e) => setVoucherStatusId(Number(e.target.value))}
                 required
               >
-                <option value="ACTIVE">ACTIVE</option>
-                <option value="DISABLE">DISABLE</option>
+                {voucherStatuses.map(status => (
+                  <option key={status.voucherStatusId} value={status.voucherStatusId}>
+                    {status.voucherStatus}
+                  </option>
+                ))}
               </select>
             </label>
           </div>
