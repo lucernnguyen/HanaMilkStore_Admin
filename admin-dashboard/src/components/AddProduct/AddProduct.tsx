@@ -110,12 +110,12 @@ const AddProduct: React.FC = () => {
 
   return (
     <div className="add-product-container">
-      <h2>Add Product</h2>
+      <h2>Thêm sản phẩm</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-row">
           <div className="form-column">
             <label>
-              Milk Name:
+              Tên sản phẩm:
               <input
                 type="text"
                 value={milkName}
@@ -125,13 +125,13 @@ const AddProduct: React.FC = () => {
               {errors.milkName && <p className="error">{errors.milkName}</p>}
             </label>
             <label>
-              Brand:
+              Nhãn hiệu:
               <select
                 value={brandId ?? ''}
                 onChange={(e) => setBrandId(Number(e.target.value))}
                 required
               >
-                <option value="" disabled>Select Brand</option>
+                <option value="" disabled>Chọn Nhãn hiệu</option>
                 {brands.map(brand => (
                   <option key={brand.brandId} value={brand.brandId}>
                     {brand.brandName}
@@ -141,7 +141,7 @@ const AddProduct: React.FC = () => {
               {errors.brandId && <p className="error">{errors.brandId}</p>}
             </label>
             <label>
-              Capacity:
+              Dung Tích:
               <input
                 type="text"
                 value={capacity}
@@ -151,13 +151,13 @@ const AddProduct: React.FC = () => {
               {errors.capacity && <p className="error">{errors.capacity}</p>}
             </label>
             <label>
-              Milk Type:
+              Loại Sữa:
               <select
                 value={milkTypeId ?? ''}
                 onChange={(e) => setMilkTypeId(Number(e.target.value))}
                 required
               >
-                <option value="" disabled>Select Milk Type</option>
+                <option value="" disabled>Chọn Loại Sữa</option>
                 {milkTypes.map(type => (
                   <option key={type.milkTypeId} value={type.milkTypeId}>
                     {type.typeName}
@@ -169,7 +169,7 @@ const AddProduct: React.FC = () => {
           </div>
           <div className="form-column">
             <label>
-              Appropriate Age:
+              Độ tuổi phù hợp:
               <input
                 type="text"
                 value={appropriateAge}
@@ -179,7 +179,7 @@ const AddProduct: React.FC = () => {
               {errors.appropriateAge && <p className="error">{errors.appropriateAge}</p>}
             </label>
             <label>
-              Storage Instructions:
+              Hướng dẫn bảo quản:
               <input
                 type="text"
                 value={storageInstructions}
@@ -189,7 +189,7 @@ const AddProduct: React.FC = () => {
               {errors.storageInstructions && <p className="error">{errors.storageInstructions}</p>}
             </label>
             <label>
-              Price:
+              Giá:
               <input
                 type="number"
                 value={price}
@@ -199,7 +199,7 @@ const AddProduct: React.FC = () => {
               {errors.price && <p className="error">{errors.price}</p>}
             </label>
             <label>
-              Discount:
+              Chiết khấu:
               <input
                 type="number"
                 value={discount}
@@ -208,7 +208,7 @@ const AddProduct: React.FC = () => {
               {errors.discount && <p className="error">{errors.discount}</p>}
             </label>
             <label>
-              Image:
+              Ảnh sản phẩm:
               <input
                 type="file"
                 onChange={handleFileChange}
@@ -218,7 +218,7 @@ const AddProduct: React.FC = () => {
             </label>
           </div>
         </div>
-        <button type="submit">Add Product</button>
+        <button type="submit">Thêm sản phẩm</button>
       </form>
     </div>
   );

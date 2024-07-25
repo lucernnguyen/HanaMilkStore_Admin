@@ -77,9 +77,26 @@ const VoucherList: React.FC = () => {
     }
   };
 
-  const handleEditChange = (field: string, value: string | number) => {
+  const handleEditChange = (field: keyof Voucher, value: string | number) => {
     if (editVoucher) {
+      if (field === 'discount') {
+        const numericValue = typeof value === 'string' ? parseFloat(value) : value;
+        if (numericValue < 0.01 || numericValue > 1) {
+          setError('Discount must be between 0.01 and 1');
+          return;
+        }
+      }
+
+      if (field === 'quantity') {
+        const numericValue = typeof value === 'string' ? parseInt(value, 10) : value;
+        if (numericValue < 0 || numericValue > 100) {
+          setError('Quantity must be between 0 and 100');
+          return;
+        }
+      }
+
       setEditVoucher({ ...editVoucher, [field]: value });
+      setError(null); // Clear error when the value is valid
     }
   };
 
@@ -110,18 +127,18 @@ const VoucherList: React.FC = () => {
 
   return (
     <div className="voucher-list-container">
-      <h2>Voucher List</h2>
+      <h2>Danh sách mã giảm giá</h2>
       {error && <p className="error">{error}</p>}
       {success && <p className="success">{success}</p>}
       <table className="voucher-list-table">
         <thead>
           <tr>
-            <th>Title</th>
-            <th>Discount</th>
-            <th>Start Date</th>
-            <th>End Date</th>
-            <th>Status</th>
-            <th>Action</th>
+            <th>Tên mã</th>
+            <th>Chiết Khấu</th>
+            <th>Ngày bắt đầu</th>
+            <th>Ngày hết hạn</th>
+            <th>Trạng Thái</th>
+            <th>Thao tác</th>
           </tr>
         </thead>
         <tbody>
@@ -151,21 +168,21 @@ const VoucherList: React.FC = () => {
         </tbody>
       </table>
       <div className="pagination">
-        <button onClick={handlePreviousPage} disabled={page === 1}>Previous</button>
-        <button onClick={handleNextPage}>Next</button>
+        <button onClick={handlePreviousPage} disabled={page === 1}>Trang trước</button>
+        <button onClick={handleNextPage} disabled={vouchers.length < pageSize}>Trang sau</button>
       </div>
       <Dialog open={editDialogOpen} onClose={() => setEditDialogOpen(false)}>
-        <DialogTitle>Edit Voucher</DialogTitle>
+        <DialogTitle>Chỉnh sửa mã giảm giá</DialogTitle>
         <DialogContent>
           <TextField
-            label="Title"
+            label="Tên mã"
             value={editVoucher?.title || ''}
             onChange={e => handleEditChange('title', e.target.value)}
             fullWidth
             margin="dense"
           />
           <TextField
-            label="Start Date"
+            label="Ngày bắt đầu"
             type="datetime-local"
             value={editVoucher?.startDate || ''}
             onChange={e => handleEditChange('startDate', e.target.value)}
@@ -176,7 +193,7 @@ const VoucherList: React.FC = () => {
             }}
           />
           <TextField
-            label="End Date"
+            label="Ngày kết thúc"
             type="datetime-local"
             value={editVoucher?.endDate || ''}
             onChange={e => handleEditChange('endDate', e.target.value)}
@@ -187,24 +204,25 @@ const VoucherList: React.FC = () => {
             }}
           />
           <TextField
-            label="Discount"
+            label="Chiết khấu"
             value={editVoucher?.discount || ''}
+            onChange={e => handleEditChange('discount', e.target.value)}
             fullWidth
             margin="dense"
-            InputProps={{
-              readOnly: true,
+            InputLabelProps={{
+              shrink: true,
             }}
           />
           <TextField
-            label="Quantity"
+            label="Số lượng"
             type="number"
             value={editVoucher?.quantity || 0}
-            onChange={e => handleEditChange('quantity', parseInt(e.target.value, 10))}
+            onChange={e => handleEditChange('quantity', e.target.value)}
             fullWidth
             margin="dense"
           />
           <TextField
-            label="Status"
+            label="Trạng thái"
             value={editVoucher?.voucherStatusId || ''}
             onChange={e => handleEditChange('voucherStatusId', parseInt(e.target.value, 10))}
             select
@@ -218,8 +236,8 @@ const VoucherList: React.FC = () => {
         </DialogContent>
         <div className="dialog-action-buttons">
           <DialogActions>
-            <Button onClick={() => setEditDialogOpen(false)}>Cancel</Button>
-            <Button onClick={handleEditSave} color="primary">Save</Button>
+            <Button onClick={() => setEditDialogOpen(false)}>Hủy</Button>
+            <Button onClick={handleEditSave} color="primary">Lưu</Button>
           </DialogActions>
         </div>
       </Dialog>

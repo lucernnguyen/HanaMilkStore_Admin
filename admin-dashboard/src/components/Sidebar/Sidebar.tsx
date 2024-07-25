@@ -24,12 +24,12 @@ const Sidebar: React.FC = () => {
       </div>
       <ul>
         <li>
-          <Link to="/">Homepage</Link>
+          <Link to="/">Trang Chủ</Link>
         </li>
         {userRole && [1, 2].includes(userRole) && (
           <li>
             <button className="dropdown-toggle" onClick={toggleProductDropdown}>
-              Product
+              Sản Phẩm
             </button>
             {isProductDropdownOpen && (
               <ul className="dropdown-menu">
@@ -44,25 +44,25 @@ const Sidebar: React.FC = () => {
           </li>
         )}
         <li>
-          <Link to="/orders">Orders</Link>
+          <Link to="/orders">Đơn Hàng</Link>
         </li>
         {userRole && userRole === 1 && (
           <li>
-            <Link to="/customers">Customers</Link>
+            <Link to="/customers">Khách Hàng</Link>
           </li>
         )}
         {userRole && [1, 2].includes(userRole) && (
           <li>
             <button className="dropdown-toggle" onClick={toggleVoucherDropdown}>
-              Voucher
+              Mã giảm giá
             </button>
             {isVoucherDropdownOpen && (
               <ul className="dropdown-menu">
                 <li>
-                  <Link to="/vouchers">Quản lý voucher</Link>
+                  <Link to="/vouchers">Quản lý mã</Link>
                 </li>
                 <li>
-                  <Link to="/add-voucher">Thêm voucher</Link>
+                  <Link to="/add-voucher">Thêm mã</Link>
                 </li>
               </ul>
             )}

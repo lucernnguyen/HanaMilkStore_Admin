@@ -81,7 +81,7 @@ const OrderList: React.FC = () => {
       <table className={styles.table}>
         <thead>
           <tr>
-            <th>ID Đơn hàng</th>
+            <th>Mã Đơn hàng</th>
             <th>Ngày tạo</th>
             <th>Giỏ hàng</th>
             <th>Tổng giá</th>

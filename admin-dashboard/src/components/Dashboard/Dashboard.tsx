@@ -54,8 +54,12 @@ const Dashboard: React.FC = () => {
           return acc;
         }, {});
 
-        const labels = Object.keys(revenueByDate).sort((a, b) => new Date(a).getTime() - new Date(b).getTime());
-        const data = labels.map(date => revenueByDate[date]);
+        // Get the range of dates
+        const dateRange = getDateRange(completedOrders);
+
+        // Ensure every date in the range has a revenue value
+        const labels = dateRange.map(date => date.toLocaleDateString());
+        const data = labels.map(date => revenueByDate[date] || 0);
 
         setRevenueData({
           labels,
@@ -80,6 +84,21 @@ const Dashboard: React.FC = () => {
     fetchStats();
   }, []);
   
+  const getDateRange = (orders: any[]) => {
+    if (orders.length === 0) return [];
+
+    const minDate = new Date(Math.min(...orders.map(order => new Date(order.dateCreate).getTime())));
+    const maxDate = new Date(Math.max(...orders.map(order => new Date(order.dateCreate).getTime())));
+
+    const dateArray = [];
+    let currentDate = minDate;
+    while (currentDate <= maxDate) {
+      dateArray.push(new Date(currentDate));
+      currentDate.setDate(currentDate.getDate() + 1);
+    }
+    return dateArray;
+  };
+
   const formatCurrency = (value: number) => {
     return new Intl.NumberFormat('vi-VN', {
       style: 'currency',

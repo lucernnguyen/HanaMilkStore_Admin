@@ -56,7 +56,7 @@ const LatestOrders: React.FC = () => {
             <tr key={order.orderId}>
               <td>{order.memberName}</td>
               <td>{order.dateCreate}</td>
-              <td>{order.itemsCount} items</td>
+              <td>{order.itemsCount} món</td>
               <td>{formatCurrency(order.amount)}</td>
               <td>
                 <Link to={`/order-detail/${order.orderId}`}>

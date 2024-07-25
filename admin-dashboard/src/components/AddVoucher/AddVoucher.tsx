@@ -30,17 +30,27 @@ const AddVoucher: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    if (!title || !startDate || !endDate || !discount || !quantity || voucherStatusId === null) {
+  
+    if (!title || !startDate || !endDate || voucherStatusId === null) {
       setError('Vui lòng điền đầy đủ thông tin.');
       return;
     }
-
+  
     if (new Date(startDate) > new Date(endDate)) {
       setError('Ngày bắt đầu không được lớn hơn ngày kết thúc.');
       return;
     }
-
+  
+    if (discount < 0.01 || discount > 1) {
+      setError('Giảm giá phải nằm trong phạm vi từ 0.01 tới 1.');
+      return;
+    }
+  
+    if (quantity > 100) {
+      setError('Số lượng không được vượt quá 100.');
+      return;
+    }
+  
     const newVoucher = {
       title,
       startDate,
@@ -49,7 +59,7 @@ const AddVoucher: React.FC = () => {
       quantity,
       voucherStatusId,
     };
-
+  
     try {
       await voucherService.createVoucher(newVoucher);
       navigate('/vouchers');
@@ -57,6 +67,7 @@ const AddVoucher: React.FC = () => {
       setError('Có lỗi xảy ra khi thêm voucher.');
     }
   };
+  
 
   return (
     <div className="add-voucher-container">
@@ -94,7 +105,7 @@ const AddVoucher: React.FC = () => {
           </div>
           <div className="form-column">
             <label>
-              Giảm Giá (%):
+              Chiết khấu:
               <input
                 type="number"
                 value={discount}
