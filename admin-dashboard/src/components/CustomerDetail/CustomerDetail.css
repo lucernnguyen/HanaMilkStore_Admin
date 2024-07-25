@@ -6,6 +6,7 @@
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   font-family: 'Arial', sans-serif;
+  
 }
 
 .customer-detail-container h1 {
@@ -18,8 +19,13 @@
   padding: 20px;
   background-color: #fff;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);  
   margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items:  flex-start;
+  max-width: 800px; /* Hoặc bạn có thể điều chỉnh theo yêu cầu */
+  overflow: hidden; /* Đảm bảo không có nội dung bị tràn ra ngoài card */
 }
 
 .customer-detail-container .card h2 {
@@ -75,4 +81,15 @@
   color: #555;
   font-size: 18px;
   margin-top: 20px;
+}
+.customer-detail-container .profile-picture img {
+  width: 140px; 
+  height: 140px;
+  border-radius: 50%; 
+  object-fit: cover; /* Đảm bảo ảnh không bị méo */
+}
+.customer-detail-container .user-info {
+  flex: 1;
+  margin-right: 10px; /* Tạo khoảng cách giữa thông tin và hình ảnh */
+
 }
