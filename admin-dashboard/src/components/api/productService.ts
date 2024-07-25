@@ -35,12 +35,8 @@ const getAllMilkTypes = async (): Promise<MilkType[]> => {
   return response.data;
 };
 
-const updateProductImage = async (id: number, formData: FormData): Promise<void> => {
-  await axios.put(`${API_URL}/milk-pictures/${id}`, formData, {
-    headers: {
-      'Content-Type': 'multipart/form-data'
-    }
-  });
+const updateProductImage = async (milkPictureId: number, newImageUrl: string): Promise<void> => {
+  await axios.put(`${API_URL}/milk-pictures/${milkPictureId}`, { picture: newImageUrl });
 };
 const uploadProductImage = async (milkId: number, picture: string): Promise<void> => {
   try {

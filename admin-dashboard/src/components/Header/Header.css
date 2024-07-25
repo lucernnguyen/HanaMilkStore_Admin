@@ -1,34 +1,63 @@
 .header {
   display: flex;
   align-items: center;
-  justify-content: flex-end; 
+  justify-content: flex-end;
   padding-bottom: 20px;
   border-bottom: 2px solid #ccc;
 }
-.page-title{
+
+.page-title {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
 }
 
-  .icon {
-    margin: 0 10px;
-    font-size: 20px;
-    cursor: pointer;
+.icon {
+  margin: 0 10px;
+  font-size: 20px;
+  cursor: pointer;
 }
-  
-  .admin-info {
-    display: flex;
-    align-items: center;
-  }
-  
-  .admin-name {
-    margin-right: 10px;
-  }
-  
-  .admin-photo {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-  }
-  
+
+.admin-info {
+  display: flex;
+  align-items: center;
+}
+
+.admin-name {
+  margin-right: 10px;
+}
+
+.admin-photo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.admin-photo-container {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.header .dropdown-menu {
+  position: absolute;
+  top: 100%; /* Đặt dropdown dưới admin-photo-container */
+  right: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  width: fit-content;
+}
+
+.header .dropdown-item {
+  padding: 10px 20px;
+  cursor: pointer;
+  color: #333;
+  width: fit-content;
+}
+
+.header .dropdown-item:hover {
+  background-color: #f1f1f1;
+}

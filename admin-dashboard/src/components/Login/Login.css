@@ -15,7 +15,7 @@
   }
   
   .w-1 {
-    width: 41%;
+    width: fit-content;
     margin: auto;
   }
   

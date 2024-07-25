@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-
 import './CustomerList.css';
 import { Customer, User } from '../../types/User';
 import customerService from '../api/customerService';
@@ -52,7 +51,6 @@ const CustomerList: React.FC = () => {
             <th>Ngày đăng ký</th>
             <th>Số điện thoại</th>
             <th>Địa chỉ</th>
-            <th>Thao tác</th>
           </tr>
         </thead>
         <tbody>
@@ -69,11 +67,11 @@ const CustomerList: React.FC = () => {
                   'N/A'
                 )}
               </td>
-              <td><Link to={`/customer-details/${customer.memberId}`}>{customer.userDetails?.userName}</Link></td>
+              <td><Link to={`/customers/customer-details/${customer.memberId}`}>{customer.userDetails?.userName}</Link></td>
               <td>{customer.userDetails?.dateCreate}</td>
               <td>{customer.userDetails?.phone}</td>
               <td>{customer.userDetails?.address}</td>
-              <td><button>Chỉnh sửa</button></td>
+              
             </tr>
           ))}
         </tbody>

@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import productService from '../api/productService';
 import { Product, Brand, MilkType } from '../../types/Product';
 import './EditProduct.css';
+import { storage } from '../../firebaseConfig';
+import firebaseService from '../api/firebaseService';
 
 const EditProduct: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -73,21 +76,39 @@ const EditProduct: React.FC = () => {
   };
 
   const handleFileUpload = async () => {
-    if (selectedFile && selectedPictureId) {
+    if (selectedFile) {
       try {
-        const formData = new FormData();
-        formData.append('file', selectedFile);
-        await productService.updateProductImage(selectedPictureId, formData);
+        // Upload the new image to Firebase Storage
+        const storageRef = ref(storage, `milk-pictures/${selectedFile.name}`);
+        await uploadBytes(storageRef, selectedFile);
+        const downloadURL = await getDownloadURL(storageRef);
+  
+        if (selectedPictureId && product) {
+          // Get the current picture reference
+          const currentPicture = product.milkPictures.find(picture => picture.milkPictureId === selectedPictureId);
+          if (currentPicture) {
+            await firebaseService.deleteImageFromFirebase(currentPicture.picture); 
+          }
+          // Update the image URL in the database
+          await productService.updateProductImage(selectedPictureId, downloadURL);
+        } else if (product) {
+          // Add new image URL to the database
+          await productService.uploadProductImage(product.milkId, downloadURL);
+        }
+  
         // Refresh the product data to show the new image
         const updatedProduct = await productService.getProductById(Number(id));
         setProduct(updatedProduct);
+        setSelectedFile(null);
+        setSelectedPictureId(null);
       } catch (error) {
         console.error('Error uploading file:', error);
       }
     } else {
-      console.log('No file selected or picture not chosen');
+      console.log('No file selected');
     }
   };
+  
 
   if (!product) {
     return <div>Loading...</div>;
@@ -153,7 +174,7 @@ const EditProduct: React.FC = () => {
       <div className="image-upload-section">
         <h3>Upload Image</h3>
         <input type="file" onChange={handleFileChange} />
-        <button onClick={handleFileUpload} disabled={!selectedFile || !selectedPictureId}>
+        <button onClick={handleFileUpload} disabled={!selectedFile}>
           Upload
         </button>
       </div>

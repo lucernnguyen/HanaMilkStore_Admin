@@ -17,9 +17,7 @@ const OrderDetailComponent: React.FC = () => {
   const [orderDetail, setOrderDetail] = useState<OrderDetail | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [newStatus, setNewStatus] = useState<string>('');
   const [statuses, setStatuses] = useState<{ statusId: number, status: string }[]>([]);
-  const [statusId, setStatusId] = useState<number>(0);
 
   useEffect(() => {
     const fetchOrderDetail = async () => {
@@ -66,8 +64,6 @@ const OrderDetailComponent: React.FC = () => {
           };
 
           setOrderDetail(data as OrderDetail);
-          setNewStatus(order.statusId.toString());
-          setStatusId(order.statusId);
         } else {
           console.error('No order found with the provided id');
           setError('No order found with the provided id. Please check the id and try again.');
@@ -94,22 +90,15 @@ const OrderDetailComponent: React.FC = () => {
     fetchStatuses();
   }, [id]);
 
-  const handleStatusChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedStatusId = parseInt(e.target.value, 10);
-    setNewStatus(selectedStatusId.toString());
-    setStatusId(selectedStatusId);
-  };
-
-  const handleUpdateStatus = async () => {
+  const handleConfirm = async () => {
     if (orderDetail) {
       try {
-        // Assuming the new method signature includes voucherId
-        await orderService.updateOrderStatus(orderDetail.orderId, statusId, orderDetail.voucherId);
+        await orderService.updateOrderStatus(orderDetail.orderId, 3, orderDetail.voucherId);
         const updatedOrderDetail = await orderService.getOrderById(orderDetail.orderId);
         setOrderDetail(updatedOrderDetail);
       } catch (error) {
         console.error('Error updating order status:', error);
-        setError('Failed to update order status. Please try again later.');
+        setError('Failed to confirm order. Please try again later.');
       }
     }
   };
@@ -184,15 +173,11 @@ const OrderDetailComponent: React.FC = () => {
           <p><strong>Mã đơn hàng:</strong> {orderDetail.orderId}</p>
           <p><strong>Trạng thái:</strong> {getStatusName(orderDetail.statusId)}</p>
 
-          <div className="update-status-section">
-            <label htmlFor="status">Cập nhật trạng thái:</label>
-            <select id="status" value={newStatus} onChange={handleStatusChange}>
-              {statuses.map(status => (
-                <option key={status.statusId} value={status.statusId}>{status.status}</option>
-              ))}
-            </select>
-            <button onClick={handleUpdateStatus}>Cập nhật</button>
-          </div>
+          {orderDetail.statusId === 1 && (
+            <div className="confirm-section">
+              <button onClick={handleConfirm}>Đồng ý</button>
+            </div>
+          )}
         </div>
       </div>
       <h3>Thành tiền</h3>

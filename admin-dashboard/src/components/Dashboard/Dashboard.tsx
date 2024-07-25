@@ -32,7 +32,7 @@ const Dashboard: React.FC = () => {
           productService.getAllProductsWithouFilter()
         ]);
 
-        const completedOrders = orders.filter((order: any) => order.statusId == 3 );
+        const completedOrders = orders.filter((order: any) => order.statusId === 3 );
 
         const totalRevenue = completedOrders.reduce((sum: number, order: any) => sum + order.amount, 0);
         const totalCustomers = customers.length;

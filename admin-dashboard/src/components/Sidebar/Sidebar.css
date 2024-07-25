@@ -33,12 +33,24 @@ li a {
 .dropdown {
   cursor: pointer;
 }
-
-.dropdown-menu {
+.sidebar .dropdown-toggle {
+  background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  padding: 0;
+  text-align: left;
+}
+.sidebar .dropdown-menu {
   list-style-type: none;
   padding-left: 20px;
 }
 
-.dropdown-menu li {
+.sidebar .dropdown-menu li {
   padding: 10px 0;
+}
+.sidebar .dropdown-menu li a {
+  text-decoration: none;
+  color: inherit;
 }

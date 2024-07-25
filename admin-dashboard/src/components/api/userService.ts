@@ -9,8 +9,17 @@ const getUserById= async (id: number) => {
     const response = await axios.get(`${API_URL}?phone=${phone}`);
     return response.data;
 };
+const deleteUser = async (id: number) => {
+    try {
+      await axios.delete(`${API_URL}/${id}`);
+    } catch (error) {
+      console.error('Error in deleteUser:', error);
+      throw error;
+    }
+  }
 const userService = {
     getUserById,
-    getUserByFilter
+    getUserByFilter,
+    deleteUser
 };
 export default userService;

@@ -9,7 +9,7 @@ const ORDER_DETAIL_API_URL = 'https://localhost:7188/api/order-details';
 const MEMBER_API_URL = 'https://localhost:7188/api/members';
 const VOUCHER_API_URL = 'https://localhost:7188/api/vouchers';
 const USER_API_URL = 'https://localhost:7188/api/users';
-
+const COMMENT_API_URL = 'https://localhost:7188/api/comments';
                  
 const getAllOrders = async (page: number, pageSize: number): Promise<Order[]> => {
   const response = await axios.get(`${API_URL}?pageIndex=${page}&pageSize=${pageSize}`);
@@ -97,10 +97,37 @@ const updateOrderStatus = async (orderId: number, statusId: number, voucherId?: 
     throw error;
   }
 };
-
+const deleteOrderDetail = async (orderDetailId: number) => {
+  try {
+    await axios.delete(`${ORDER_DETAIL_API_URL}/${orderDetailId}`);
+  } catch (error) {
+    console.error('Error in deleteOrderDetail:', error);
+    throw error;
+  }
+}
+const deleteOrder = async (orderId: number) => {
+  try {
+    await axios.delete(`${API_URL}/${orderId}`);
+  } catch (error) {
+    console.error('Error in deleteOrder:', error);
+    throw error;
+  }
+}
 const getProductDetailsByOrderDetailId = (orderDetailId: number) => {
   return axios.get(`${API_URL}/order-details/${orderDetailId}`).then(res => res.data);
 };
+const getAllComments = async () => {
+  const response = await axios.get(`${COMMENT_API_URL}`);
+  return response.data;
+}
+const deleteComment = async (commentId: number) => {
+  try {
+    await axios.delete(`${COMMENT_API_URL}/${commentId}`);
+  } catch (error) {
+    console.error('Error in deleteComment:', error);
+    throw error;
+  }
+}
 const orderService = {
   getAllOrders,
   getOrderById,
@@ -111,7 +138,11 @@ const orderService = {
  getProductDetailsByOrderDetailId,
  getOrderDetailsById,
   getAllOrdersNoPagination,
-  getOrdersByOrderStatus
+  getOrdersByOrderStatus,
+  deleteOrderDetail,
+  deleteOrder,
+  getAllComments,
+  deleteComment
 };
 
 export default orderService;
